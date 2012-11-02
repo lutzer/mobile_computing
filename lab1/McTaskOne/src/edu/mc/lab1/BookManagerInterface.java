@@ -1,4 +1,4 @@
-package edu.mc.taskOne;
+package edu.mc.lab1;
 import java.util.ArrayList;
 
 public interface BookManagerInterface {

@@ -1,4 +1,4 @@
-package edu.mc.taskOne;
+package edu.mc.lab1;
 
 public class Book {
 

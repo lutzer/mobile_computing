@@ -1,4 +1,4 @@
-package edu.mc.taskOne;
+package edu.mc.lab1;
 
 import java.util.ArrayList;
 
@@ -96,6 +96,9 @@ public class SimpleBookManager implements BookManagerInterface {
 
 	@Override
 	public float getMeanPrice() {
+		if (books.isEmpty())
+			return 0;
+		
 		return this.getTotalCost()/(float)books.size();
 	}
 
