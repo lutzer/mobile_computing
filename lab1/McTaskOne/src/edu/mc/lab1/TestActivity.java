@@ -1,3 +1,4 @@
+/* Lutznmatic */
 package edu.mc.lab1;
 
 import android.app.Activity;
