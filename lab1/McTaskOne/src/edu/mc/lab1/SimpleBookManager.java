@@ -13,7 +13,7 @@ public class SimpleBookManager implements BookManagerInterface {
 		books = new ArrayList<Book>();
 		
 		// add a few books
-		Book book1 = new Book("Momo", "Michal Ende", 22, "012", "Book Circle");
+		Book book1 = new Book("Michael Ende", "Momo", 22, "012", "Book Circle");
 		books.add(book1);
 		Book book2 = new Book("Johann Wolfgang von Goethe", "Die Leiden des Jungen Werther", 5, "0123", "German Literature");
 		books.add(book2);
