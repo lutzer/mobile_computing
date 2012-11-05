@@ -3,10 +3,12 @@ package edu.mc.lab1;
 import java.util.ArrayList;
 
 public class SimpleBookManager implements BookManagerInterface {
+	
+	private static SimpleBookManager instance = null;
 
 	private ArrayList<Book> books;
 	
-	public SimpleBookManager() {
+	private SimpleBookManager() {
 		
 		books = new ArrayList<Book>();
 		
@@ -22,6 +24,13 @@ public class SimpleBookManager implements BookManagerInterface {
 		Book book5 = new Book("Daniel Kehlmann", "Die Vermessung der Welt", 25, "0123456", "German Literature");
 		books.add(book5);
 	}
+	
+	public static SimpleBookManager getInstance() {
+        if (instance == null) {
+            instance = new SimpleBookManager();
+        }
+        return instance;
+    }
 
 	@Override
 	public int count() {
