@@ -2,6 +2,9 @@ package edu.mc.lab1;
 
 import java.util.ArrayList;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -13,9 +16,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends SherlockActivity {
 	
 	/*
 	 *  Class holds the books for the listview
@@ -61,7 +65,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         bookManager = SimpleBookManager.getInstance();
-        
     	
     	ArrayList<Book> books = bookManager.getAllBooks(); 
     	
@@ -71,8 +74,34 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
+    /*public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getSupportMenuInflater().inflate(R.menu.menu, menu);;
+        return super.onCreateOptionsMenu(menu);
+    }*/
+    
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+         switch (item.getItemId())
+         {
+         case R.id.About:
+             Toast.makeText(MainActivity.this, "Android Menu example", Toast.LENGTH_SHORT).show();
+             return true;
+  
+         case R.id.Submenu:
+             Toast.makeText(MainActivity.this, "Submenu is Selected", Toast.LENGTH_SHORT).show();
+             return true;
+  
+         case R.id.Settings:
+             Toast.makeText(MainActivity.this, "Basic Settings is Selected", Toast.LENGTH_SHORT).show();
+             return true;
+             
+         case R.id.submenu_1:
+             Toast.makeText(MainActivity.this, "Sub Menu is Selected", Toast.LENGTH_SHORT).show();
+             return true;        
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 }
