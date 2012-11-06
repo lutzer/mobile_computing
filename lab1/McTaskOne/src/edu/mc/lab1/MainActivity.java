@@ -3,6 +3,7 @@ package edu.mc.lab1;
 import java.util.ArrayList;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -74,11 +74,11 @@ public class MainActivity extends SherlockActivity {
     }
 
     @Override
-    /*public boolean onCreateOptionsMenu(Menu menu)
+    public boolean onCreateOptionsMenu(Menu menu)
     {
-        getSupportMenuInflater().inflate(R.menu.menu, menu);;
+        getSupportMenuInflater().inflate(R.layout.menu, menu);;
         return super.onCreateOptionsMenu(menu);
-    }*/
+    }
     
     public boolean onOptionsItemSelected(MenuItem item)
     {
