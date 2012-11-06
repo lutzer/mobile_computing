@@ -6,15 +6,11 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 import android.os.Bundle;
-import android.app.Activity;
-import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class SummaryActivity extends SherlockActivity {
 
+	SimpleBookManager bookManager;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,11 +19,28 @@ public class SummaryActivity extends SherlockActivity {
         //enable back button
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        
+        bookManager = SimpleBookManager.getInstance();
+        
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportMenuInflater().inflate(R.menu.activity_summary, menu);
         return true;
+    }
+    
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+         switch (item.getItemId())
+         {
+         case android.R.id.home:
+        	 finish();
+             //Toast.makeText(MainActivity.this, "Open Summary activity", Toast.LENGTH_SHORT).show();
+             return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 }
