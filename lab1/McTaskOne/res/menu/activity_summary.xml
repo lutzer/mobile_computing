@@ -3,9 +3,6 @@
            available in the action bar. If space is available,
            the menu is placed on the Action Bar.
     -->
-    <item android:id="@+id/Summary"
-          android:title="Summary"
-          android:showAsAction="ifRoom" />
  
     <item android:id="@+id/Menu"
           android:title="Menu &gt;"

@@ -2,6 +2,7 @@ package edu.mc.lab1;
 
 import java.util.ArrayList;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -9,6 +10,7 @@ import com.actionbarsherlock.view.MenuItem;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,10 +66,12 @@ public class MainActivity extends SherlockActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        //enable back button
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        
         bookManager = SimpleBookManager.getInstance();
-    	
     	ArrayList<Book> books = bookManager.getAllBooks(); 
-    	
     	 adapter = new BookAdapter(this,books);
          ((ListView)findViewById(R.id.listView)).setAdapter(adapter);
         
@@ -76,7 +80,7 @@ public class MainActivity extends SherlockActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getSupportMenuInflater().inflate(R.layout.menu, menu);;
+        getSupportMenuInflater().inflate(R.menu.activity_main, menu);;
         return super.onCreateOptionsMenu(menu);
     }
     
@@ -85,16 +89,14 @@ public class MainActivity extends SherlockActivity {
 
          switch (item.getItemId())
          {
-         case R.id.About:
-             Toast.makeText(MainActivity.this, "Android Menu example", Toast.LENGTH_SHORT).show();
+         case R.id.Summary:
+        	 Intent intent = new Intent(getApplicationContext(), SummaryActivity.class);
+        	 startActivity(intent);
+             //Toast.makeText(MainActivity.this, "Open Summary activity", Toast.LENGTH_SHORT).show();
              return true;
   
-         case R.id.Submenu:
-             Toast.makeText(MainActivity.this, "Submenu is Selected", Toast.LENGTH_SHORT).show();
-             return true;
-  
-         case R.id.Settings:
-             Toast.makeText(MainActivity.this, "Basic Settings is Selected", Toast.LENGTH_SHORT).show();
+         case R.id.Menu:
+             Toast.makeText(MainActivity.this, "Menu is Selected", Toast.LENGTH_SHORT).show();
              return true;
              
          case R.id.submenu_1:
