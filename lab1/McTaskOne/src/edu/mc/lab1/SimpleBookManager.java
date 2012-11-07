@@ -2,6 +2,7 @@ package edu.mc.lab1;
 
 import java.util.ArrayList;
 
+
 public class SimpleBookManager implements BookManagerInterface {
 	
 	private static SimpleBookManager instance = null;

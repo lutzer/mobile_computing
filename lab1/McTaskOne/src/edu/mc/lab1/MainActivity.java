@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -67,13 +69,29 @@ public class MainActivity extends SherlockActivity {
         setContentView(R.layout.activity_main);
         
         //enable back button
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        
+        //ActionBar actionBar = getSupportActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled(true);
+
         bookManager = SimpleBookManager.getInstance();
+        
     	ArrayList<Book> books = bookManager.getAllBooks(); 
-    	 adapter = new BookAdapter(this,books);
-         ((ListView)findViewById(R.id.listView)).setAdapter(adapter);
+    	adapter = new BookAdapter(this,books);
+    	
+    	ListView listView =  ((ListView)findViewById(R.id.listView));
+    	listView.setAdapter(adapter);
+    	
+    	// link list with detail activity
+        listView.setOnItemClickListener(new OnItemClickListener() 
+        {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+			int position, long id) {
+				Intent intent = new Intent(getApplicationContext(), BookDetailActivity.class);
+				intent.putExtra("bookId", position);
+	        	startActivity(intent);
+			}
+        });
+        listView.setSelector(R.drawable.abs__list_selector_holo_light);
         
     }
 
@@ -83,25 +101,15 @@ public class MainActivity extends SherlockActivity {
         getSupportMenuInflater().inflate(R.menu.activity_main, menu);;
         return super.onCreateOptionsMenu(menu);
     }
-    
+
     public boolean onOptionsItemSelected(MenuItem item)
     {
-
          switch (item.getItemId())
          {
          case R.id.Summary:
         	 Intent intent = new Intent(getApplicationContext(), SummaryActivity.class);
         	 startActivity(intent);
-             //Toast.makeText(MainActivity.this, "Open Summary activity", Toast.LENGTH_SHORT).show();
-             return true;
-  
-         case R.id.Menu:
-             Toast.makeText(MainActivity.this, "Menu is Selected", Toast.LENGTH_SHORT).show();
-             return true;
-             
-         case R.id.submenu_1:
-             Toast.makeText(MainActivity.this, "Sub Menu is Selected", Toast.LENGTH_SHORT).show();
-             return true;        
+        	 return true;
         default:
             return super.onOptionsItemSelected(item);
         }

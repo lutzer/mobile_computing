@@ -14,21 +14,32 @@
 	    	android:layout_height="wrap_content"
 	    	android:orientation="horizontal">
 	    	
-	        <ImageView
+	        <!--<ImageView
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:padding="10dp"
-	        android:src="@drawable/books"/>
+	        android:src="@drawable/books"/>-->
 	        
-	        <TextView
-	            android:id="@+id/number_of_books"
-	            style="@style/Text"
-	            android:layout_width="fill_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="center" />
+	        <LinearLayout 
+	            android:layout_width="match_parent"
+	    		android:layout_height="wrap_content"
+	    		android:orientation="vertical"
+	    		android:gravity="center">
+		        
+		        <TextView
+		            android:id="@+id/author"
+		            style="@style/Text.Author"/>
+		        
+		        <TextView
+		            android:id="@+id/title"
+		            style="@style/Text.Title"/>
+		        
+	        </LinearLayout>
 	        
 	    </LinearLayout>
-	
+	    
+	    <!--  <View style="@style/HorizontalBar"/>-->
+	    	
 	    <LinearLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
@@ -36,10 +47,10 @@
 	        
 	        <TextView
 	            style="@style/Text.Label"
-	            android:text="Total Costs:" />
+	            android:text="Course:" />
 	
 	        <TextView
-	            android:id="@+id/total_costs"
+	            android:id="@+id/course"
 	            style="@style/Text.Number" />
 	
 	    </LinearLayout>
@@ -51,10 +62,10 @@
 	        
 	        <TextView
 	            style="@style/Text.Label"
-	            android:text="Min Price:" />
+	            android:text="Price:" />
 	
 	        <TextView
-	            android:id="@+id/min_price"
+	            android:id="@+id/price"
 	            style="@style/Text.Number" />
 	
 	    </LinearLayout>
@@ -66,27 +77,16 @@
 	        
 	        <TextView
 	            style="@style/Text.Label"
-	            android:text="Max Price:" />
+	            android:text="ISBN:" />
 	
 	        <TextView
-	            android:id="@+id/max_price"
+	            android:id="@+id/isbn"
 	            style="@style/Text.Number" />
 	
 	    </LinearLayout>
 	    
-	    <LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:orientation="horizontal" >
-	        
-	        <TextView
-	            style="@style/Text.Label"
-	            android:text="Average Price:" />
-	
-	        <TextView
-	            android:id="@+id/avg_price"
-	            style="@style/Text.Number" />
-	
-	    </LinearLayout>
+	  
 	</LinearLayout>
+	
 </ScrollView>
+

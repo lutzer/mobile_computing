@@ -3,7 +3,7 @@
            available in the action bar. If space is available,
            the menu is placed on the Action Bar.
     -->
- 
+ 	<!--
     <item android:id="@+id/Menu"
           android:title="Menu &gt;"
           android:showAsAction="ifRoom"> 
@@ -11,5 +11,7 @@
             <item 
                 android:id="@+id/submenu_1"
                 android:title="Basic Settings" />
-            </menu></item> 
+            </menu>          
+	</item> 
+	-->
 </menu>
