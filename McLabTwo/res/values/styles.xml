@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="Theme.Styled" parent="Theme.Sherlock.Light.DarkActionBar">
+	    <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
+	    <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
+	    <item name="android:textColor">@color/font_color</item>
+	</style>
+	
+	<style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+	    
+	    <!--<item name="background">#000000</item>
+	    <item name="android:background">#000000</item>
+	    <item name="backgroundSplit">#000000</item>
+	    <item name="android:backgroundSplit">#000000</item>-->
+	    
+	</style>
+	
+	<style name="MainTheme">
+	    <item name ="android:background">@color/background_color</item>
+	</style>
+	<style name="Text">
+	    <item name = "android:padding">10dp</item>
+	</style>
+	<style name="Text.Label">
+	    <item name = "android:textStyle">bold</item>
+	    <item name = "android:gravity">right</item>
+	    <item name = "android:layout_width">match_parent</item>
+	    <item name = "android:layout_height">wrap_content</item>
+	    <item name = "android:layout_weight">2</item>
+	</style>
+	<style name="Text.Number">
+	    <item name = "android:gravity">left</item>
+	    <item name = "android:layout_width">match_parent</item>
+	    <item name = "android:layout_height">wrap_content</item>
+	    <item name = "android:layout_weight">1</item>
+	</style>
+	<style name="Text.Author">
+	    <item name = "android:gravity">center</item>
+	    <item name = "android:layout_width">match_parent</item>
+	    <item name = "android:layout_height">wrap_content</item>
+	    <item name = "android:textStyle">bold</item>
+	    <item name = "android:textSize">8pt</item>
+	</style>
+	<style name="Text.Title">
+	    <item name = "android:gravity">center</item>
+	    <item name = "android:layout_width">match_parent</item>
+	    <item name = "android:layout_height">wrap_content</item>
+	    <item name = "android:textSize">8pt</item>
+	</style>
+	
+	<style name="HorizontalBar">
+	    <item name = "android:background">#333333</item>
+	    <item name = "android:layout_width">match_parent</item>
+	    <item name = "android:layout_height">1dp</item>
+	</style>
+	
+</resources>

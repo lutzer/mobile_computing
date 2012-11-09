@@ -1,0 +1,92 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent" 
+	style="@style/MainTheme">
+
+	<LinearLayout 
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" 
+	    android:orientation="vertical">
+	    
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="horizontal">
+	    	
+	        <!--<ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:padding="10dp"
+	        android:src="@drawable/books"/>-->
+	        
+	        <LinearLayout 
+	            android:layout_width="match_parent"
+	    		android:layout_height="wrap_content"
+	    		android:orientation="vertical"
+	    		android:gravity="center">
+		        
+		        <TextView
+		            android:id="@+id/author"
+		            style="@style/Text.Author"/>
+		        
+		        <TextView
+		            android:id="@+id/title"
+		            style="@style/Text.Title"/>
+		        
+	        </LinearLayout>
+	        
+	    </LinearLayout>
+	    
+	    <!--  <View style="@style/HorizontalBar"/>-->
+	    	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	        
+	        <TextView
+	            style="@style/Text.Label"
+	            android:text="Course:" />
+	
+	        <TextView
+	            android:id="@+id/course"
+	            style="@style/Text.Number" />
+	
+	    </LinearLayout>
+	    
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	        
+	        <TextView
+	            style="@style/Text.Label"
+	            android:text="Price:" />
+	
+	        <TextView
+	            android:id="@+id/price"
+	            style="@style/Text.Number" />
+	
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	        
+	        <TextView
+	            style="@style/Text.Label"
+	            android:text="ISBN:" />
+	
+	        <TextView
+	            android:id="@+id/isbn"
+	            style="@style/Text.Number" />
+	
+	    </LinearLayout>
+	    
+	  
+	</LinearLayout>
+	
+</ScrollView>
+
