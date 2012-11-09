@@ -1,4 +1,4 @@
-package edu.mc.lab1;
+package edu.mc.lab2;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;

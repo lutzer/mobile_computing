@@ -1,4 +1,4 @@
-package edu.mc.lab1;
+package edu.mc.lab2;
 
 public class Book {
 
