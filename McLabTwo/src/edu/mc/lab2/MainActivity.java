@@ -21,7 +21,7 @@ public class MainActivity extends SherlockFragmentActivity
         setContentView(R.layout.activity_main);
         
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);  //enable home button
+        //actionBar.setDisplayHomeAsUpEnabled(true);  //enable home button
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);  //enable tab bar
         
         //add tabs
@@ -44,11 +44,6 @@ public class MainActivity extends SherlockFragmentActivity
         	 /*Intent intent = new Intent(getApplicationContext(), SummaryFragment.class);
         	 startActivity(intent);*/
         	 return true;
-         case android.R.id.home:
-        	 Intent intent = new Intent(this, MainActivity.class);
-             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-             startActivity(intent);
-             return true;
         default:
             return super.onOptionsItemSelected(item);
         }
@@ -60,11 +55,9 @@ public class MainActivity extends SherlockFragmentActivity
 		switch (tab.getPosition())
 		{
 		case 0:
-			Log.e("INFO","new bookk list fragment");
 			fragment = new BookListFragment();
 			break;
 		case 1:
-			Log.e("INFO","new summary fragment");
 			fragment = new SummaryFragment();
 			break;
 		default:
@@ -91,18 +84,9 @@ public class MainActivity extends SherlockFragmentActivity
 	 * gets called by the BookListFragment, if the user selects a book from the list
 	 */
 	public void onBookSelected(int position) {
-		SherlockFragment fragment = new BookDetailFragment();
-		Bundle args = new Bundle();
-		args.putInt("bookId", position);
-		fragment.setArguments(args);
-		
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.replace(R.id.content, fragment);
-		// and add the transaction to the back stack
-		ft.addToBackStack(null);
-
-		// Commit the transaction
-		ft.commit();
+		Intent intent = new Intent(this, BookDetailActivity.class);
+		intent.putExtra("bookId", position);
+        startActivity(intent);
 		
 	}
 }
