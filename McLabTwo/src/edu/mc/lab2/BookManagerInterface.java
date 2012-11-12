@@ -15,9 +15,9 @@ public interface BookManagerInterface {
 	
 	public void moveBook (int from, int to) throws Exception;
 	
-	public int getMinPrice();
+	public float getMinPrice();
 	
-	public int getMaxPrice();
+	public float getMaxPrice();
 	
 	public float getMeanPrice();
 	

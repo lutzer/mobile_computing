@@ -28,6 +28,13 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".BookEditActivity"
+            android:label="@string/title_activity_book_edit" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.mc.lab2.BookDetailActivity" />
+        </activity>
     </application>
 
 </manifest>

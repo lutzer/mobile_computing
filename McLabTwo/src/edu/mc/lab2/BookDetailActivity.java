@@ -6,6 +6,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ public class BookDetailActivity extends SherlockActivity {
 
 	SimpleBookManager bookManager;
 	Book book;
+	int bookId;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class BookDetailActivity extends SherlockActivity {
         bookManager = SimpleBookManager.getInstance();
         
         //get book index
-	    int bookId = -1;
+	   bookId = -1;
 	    Bundle args = getIntent().getExtras();
 	    if(args !=null)
 	    	bookId = args.getInt("bookId");
@@ -59,11 +61,9 @@ public class BookDetailActivity extends SherlockActivity {
 				@Override
 				public void OnDialogResultListener(boolean result) {
 					if (result) {
-						Log.e("INFO","Delete Book");
 						bookManager.removeBook(book);
 						finish(); //end activity
 					}
-					Log.e("INFO","Not Delete Book");
 				}
         		 
         	 });
@@ -71,8 +71,9 @@ public class BookDetailActivity extends SherlockActivity {
         	 dialog.show();
         	 return true;
          case R.id.Edit:
-        	 /*Intent intent = new Intent(getApplicationContext(), SummaryFragment.class);
-        	 startActivity(intent);*/
+        	 Intent intent = new Intent(getApplicationContext(), BookEditActivity.class);
+        	 intent.putExtra("bookId", bookId);
+        	 startActivity(intent);
         	 return true;
          case android.R.id.home:
         	 finish();

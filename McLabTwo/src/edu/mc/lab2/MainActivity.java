@@ -87,6 +87,5 @@ public class MainActivity extends SherlockFragmentActivity
 		Intent intent = new Intent(this, BookDetailActivity.class);
 		intent.putExtra("bookId", position);
         startActivity(intent);
-		
 	}
 }

@@ -4,7 +4,7 @@ public class Book {
 
 	private String author;
 	private String title;
-	private int price;
+	private float price;
 	private String isbn;
 	private String course;
 	
@@ -37,10 +37,10 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 	public String getIsbn() {

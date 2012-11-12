@@ -1,0 +1,94 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" 
+    style="@style/MainTheme">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:text="Author:" 
+                style="@style/Text.EditLabel"/>
+
+            <EditText
+                android:id="@+id/author"
+                style="@style/TextEditField"
+                android:inputType="text"/>
+        </TableRow>
+        
+    	<TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:text="Title:" 
+                style="@style/Text.EditLabel"/>
+
+            <EditText
+                android:id="@+id/title"
+                android:inputType="text"
+                style="@style/TextEditField"/>
+        </TableRow>
+        
+    	<TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:text="Course:" 
+                style="@style/Text.EditLabel"/>
+
+            <EditText
+                android:id="@+id/course"
+                android:inputType="text"
+                style="@style/TextEditField"/>
+        </TableRow>
+        
+    	<TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:text="ISBN:" 
+                style="@style/Text.EditLabel"/>
+
+            <EditText
+                android:id="@+id/isbn"
+                android:inputType="text"
+                style="@style/TextEditField"/>
+        </TableRow>
+        
+    	<TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:text="Price:" 
+                style="@style/Text.EditLabel"/>
+
+            <EditText
+                android:id="@+id/price"
+                style="@style/TextEditField"
+                android:inputType="numberDecimal" />
+            
+        </TableRow>
+    </TableLayout>
+    
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:text="Save" />
+
+    
+
+</FrameLayout>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,6 @@ public class BookListFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	    View view = inflater.inflate(R.layout.fragment_book_list, container, false);
-
 		
 		ArrayList<Book> books = bookManager.getAllBooks();
 		adapter = new BookAdapter(this.getActivity(),books);	
@@ -107,4 +107,11 @@ public class BookListFragment extends SherlockFragment {
                     + " must implement OnBookSelectedListener");
         }
     }
+    
+    @Override
+    public void onResume() {
+    	adapter.notifyDataSetChanged();
+    	super.onResume();
+    }
+   
 }

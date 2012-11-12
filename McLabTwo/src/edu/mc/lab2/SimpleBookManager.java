@@ -75,12 +75,12 @@ public class SimpleBookManager implements BookManagerInterface {
 	}
 
 	@Override
-	public int getMinPrice() {
+	public float getMinPrice() {
 		
 		if (books.isEmpty())
 			return 0;
 		
-		int minPrice = Integer.MAX_VALUE;
+		float minPrice = Float.MAX_VALUE;
 		for (Book book : books) {
 			if (book.getPrice() < minPrice)
 				minPrice = book.getPrice();
@@ -90,12 +90,12 @@ public class SimpleBookManager implements BookManagerInterface {
 	}
 
 	@Override
-	public int getMaxPrice() {
+	public float getMaxPrice() {
 		
 		if (books.isEmpty())
 			return 0;
 		
-		int maxPrice = Integer.MIN_VALUE;
+		float maxPrice = 0;
 		for (Book book : books) {
 			if (book.getPrice() > maxPrice)
 				maxPrice = book.getPrice();
