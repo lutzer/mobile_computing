@@ -17,11 +17,11 @@ public class Book {
 	}
 	
 	public Book() {
-		this.author = "unknown";
-		this.title = "unknown";
+		this.author = "";
+		this.title = "";
 		this.price = 0;
-		this.isbn = "0";
-		this.course = "unknown";
+		this.isbn = "";
+		this.course = "";
 	}
 	
 	// getter and setter methods

@@ -41,8 +41,9 @@ public class MainActivity extends SherlockFragmentActivity
          switch (item.getItemId())
          {
          case R.id.Add:
-        	 /*Intent intent = new Intent(getApplicationContext(), SummaryFragment.class);
-        	 startActivity(intent);*/
+        	 Intent intent = new Intent(getApplicationContext(), BookEditActivity.class);
+        	 intent.putExtra("addBook", true);
+        	 startActivity(intent);
         	 return true;
         default:
             return super.onOptionsItemSelected(item);

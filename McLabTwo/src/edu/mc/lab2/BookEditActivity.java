@@ -4,9 +4,12 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -18,10 +21,10 @@ public class BookEditActivity extends SherlockActivity {
 	SimpleBookManager bookManager;
 	Book book;
 	int bookId;
+	boolean addNewBook;
 	
-	//fields to validate
-	boolean inputValid;
-	EditText title;
+	//edit fields
+	EditText title,author,price,isbn,course;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,48 +34,73 @@ public class BookEditActivity extends SherlockActivity {
         
         bookManager = SimpleBookManager.getInstance();
         
-        //get book index
-	    bookId = -1;
+        //get book
 	    Bundle args = getIntent().getExtras();
 	    if(args !=null)
-	    	bookId = args.getInt("bookId");
+	    	if (args.getBoolean("addBook")) {
+	    		bookId = bookManager.count();
+	    		book = new Book();
+	    		addNewBook = true;
+	    	} else {
+	    		bookId = args.getInt("bookId");
+	    		book = bookManager.getBook(bookId);
+	    		addNewBook = false;
+	    	}
 	    
-	    book = bookManager.getBook(bookId);
+	    
 	    
 	    //exit if there is no proper book selected
 	    if (book == null)
 	    	finish();
         
         //set values
-        ((EditText) findViewById(R.id.author)).setText(book.getAuthor(),TextView.BufferType.EDITABLE);
+	    author = (EditText) findViewById(R.id.author);
+	    author.setText(book.getAuthor(),TextView.BufferType.EDITABLE);
 	    title = (EditText) findViewById(R.id.title);
 	    title.setText(book.getTitle(),TextView.BufferType.EDITABLE);
-	    ((EditText) findViewById(R.id.course)).setText(book.getCourse(),TextView.BufferType.EDITABLE);
-	    ((EditText) findViewById(R.id.isbn)).setText(book.getIsbn(),TextView.BufferType.EDITABLE); 
-	    ((EditText) findViewById(R.id.price)).setText(book.getPrice()+"",TextView.BufferType.EDITABLE);
+	    course = (EditText) findViewById(R.id.course);
+	    course.setText(book.getCourse(),TextView.BufferType.EDITABLE);
+	    isbn = (EditText) findViewById(R.id.isbn);
+	    isbn.setText(book.getIsbn(),TextView.BufferType.EDITABLE); 
+	    price = (EditText) findViewById(R.id.price);
+	    price.setText(book.getPrice()+"",TextView.BufferType.EDITABLE);
 	    
-	    
-	    //set text validators
+	    /*//set text validators
 	    title.addTextChangedListener(new TextValidator(title) {
 	        @Override
 	        public void validate(TextView textView, String text) {
 	           if (text.length() < 1) {
 	        	   textView.setError( "Title is required" );
-	        	   textView.setBackgroundColor(getResources().getColor(R.color.edit_text_bg_color_wrong_input));
-	        	   inputValid = false;
 	           } else {
-	        	   textView.setBackgroundColor(getResources().getColor(R.color.edit_text_bg_color));
-	        	   
+	        	   textView.setError(null); 
 	           }
 	        }
-	    });
+	    });*/
 	    
 	    // setup save button listener
 	    ((Button) findViewById(R.id.saveButton)).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				;
+				if (validateInput()) {
+					
+					//create new Book if needed
+					if (addNewBook) {
+						book = bookManager.createBook();
+					}
+					
+					//save book
+					book.setAuthor(author.getText().toString());
+					book.setTitle(title.getText().toString());
+					book.setCourse(course.getText().toString());
+					book.setPrice(Float.valueOf(price.getText().toString()));
+					book.setIsbn(isbn.getText().toString());
+					
+					// quit activity
+					Intent intent = new Intent().putExtra("bookId", bookId);
+					setResult(1,intent);
+					finish();
+				}
 			}
 	    });
 	      
@@ -93,6 +121,17 @@ public class BookEditActivity extends SherlockActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    
+    /*
+     * validate the input fields
+     */
+    private boolean validateInput() {
+    	if (title.getText().length() < 1) {
+    		title.setError( "Title is required" );
+    		return false;
+    	}
+    	return true;
     }
 
 }

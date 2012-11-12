@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public class BookDetailActivity extends SherlockActivity {
 
+	private static final int REQUEST_CODE = 1;
+	
 	SimpleBookManager bookManager;
 	Book book;
 	int bookId;
@@ -28,24 +30,29 @@ public class BookDetailActivity extends SherlockActivity {
         bookManager = SimpleBookManager.getInstance();
         
         //get book index
-	   bookId = -1;
+        bookId = -1;
 	    Bundle args = getIntent().getExtras();
 	    if(args !=null)
 	    	bookId = args.getInt("bookId");
 	    
-	    book = bookManager.getBook(bookId);
+	    setupTextFields();
 	    
-	    //exit if there is no proper book selected
+    }
+    
+    private void setupTextFields() {
+    	
+    	book = bookManager.getBook(bookId);
+    	
+    	//exit if there is no proper book selected
 	    if (book == null)
 	    	finish();
-	    
-	    //set texts
+    	
+    	 //set texts
 	    ((TextView) findViewById(R.id.author)).setText(book.getAuthor());
 	    ((TextView) findViewById(R.id.title)).setText(book.getTitle());
 	    ((TextView) findViewById(R.id.course)).setText(book.getCourse());
 	    ((TextView) findViewById(R.id.price)).setText(book.getPrice() + " Û");
 	    ((TextView) findViewById(R.id.isbn)).setText(book.getIsbn());
-	    
     }
     
     public boolean onOptionsItemSelected(MenuItem item)
@@ -73,7 +80,7 @@ public class BookDetailActivity extends SherlockActivity {
          case R.id.Edit:
         	 Intent intent = new Intent(getApplicationContext(), BookEditActivity.class);
         	 intent.putExtra("bookId", bookId);
-        	 startActivity(intent);
+        	 startActivityForResult(intent,REQUEST_CODE);
         	 return true;
          case android.R.id.home:
         	 finish();
@@ -88,5 +95,22 @@ public class BookDetailActivity extends SherlockActivity {
     {
         getSupportMenuInflater().inflate(R.menu.activity_book_detail, menu);;
         return super.onCreateOptionsMenu(menu);
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+      super.onActivityResult(requestCode, resultCode, data);
+      if(requestCode == REQUEST_CODE) {
+        if (resultCode == 1) { //data changed
+        	
+        	//get new book index
+            bookId = -1;
+    	    Bundle args = data.getExtras();
+    	    if(args !=null)
+    	    	bookId = args.getInt("bookId");
+        	
+        	setupTextFields();
+        }
+      }
     }
 }
