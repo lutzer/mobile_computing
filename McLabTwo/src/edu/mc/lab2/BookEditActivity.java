@@ -4,6 +4,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.View;
@@ -50,19 +51,18 @@ public class BookEditActivity extends SherlockActivity {
 	    ((EditText) findViewById(R.id.isbn)).setText(book.getIsbn(),TextView.BufferType.EDITABLE); 
 	    ((EditText) findViewById(R.id.price)).setText(book.getPrice()+"",TextView.BufferType.EDITABLE);
 	    
+	    
 	    //set text validators
 	    title.addTextChangedListener(new TextValidator(title) {
 	        @Override
 	        public void validate(TextView textView, String text) {
-	           if (text.length() < 1)
-	           {
+	           if (text.length() < 1) {
 	        	   textView.setError( "Title is required" );
+	        	   textView.setBackgroundColor(getResources().getColor(R.color.edit_text_bg_color_wrong_input));
 	        	   inputValid = false;
-	           }
-	           else
-	           {
-	        	   textView.setError(null);
-	        	   inputValid = true;
+	           } else {
+	        	   textView.setBackgroundColor(getResources().getColor(R.color.edit_text_bg_color));
+	        	   
 	           }
 	        }
 	    });

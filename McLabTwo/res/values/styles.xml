@@ -3,7 +3,6 @@
     <style name="Theme.Styled" parent="Theme.Sherlock.Light.DarkActionBar">
 	    <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
 	    <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
-	    <item name="android:textColor">@color/font_color</item>
 	</style>
 	
 	<style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
@@ -19,9 +18,10 @@
 	    <item name ="android:background">@color/background_color</item>
 	</style>
 	<style name="Text">
-	    <item name = "android:padding">10dp</item>
+	    <item name="android:textColor">@color/font_color</item>
 	</style>
 	<style name="Text.Label">
+	    <item name = "android:padding">10dp</item>
 	    <item name = "android:textStyle">bold</item>
 	    <item name = "android:gravity">right</item>
 	    <item name = "android:layout_width">match_parent</item>
@@ -29,12 +29,14 @@
 	    <item name = "android:layout_weight">2</item>
 	</style>
 	<style name="Text.Number">
+	    <item name = "android:padding">10dp</item>
 	    <item name = "android:gravity">left</item>
 	    <item name = "android:layout_width">match_parent</item>
 	    <item name = "android:layout_height">wrap_content</item>
 	    <item name = "android:layout_weight">1</item>
 	</style>
 	<style name="Text.Author">
+	    <item name = "android:padding">10dp</item>
 	    <item name = "android:gravity">center</item>
 	    <item name = "android:layout_width">match_parent</item>
 	    <item name = "android:layout_height">wrap_content</item>
@@ -42,6 +44,7 @@
 	    <item name = "android:textSize">8pt</item>
 	</style>
 	<style name="Text.Title">
+	    <item name = "android:padding">10dp</item>
 	    <item name = "android:gravity">center</item>
 	    <item name = "android:layout_width">match_parent</item>
 	    <item name = "android:layout_height">wrap_content</item>
@@ -55,6 +58,7 @@
 	</style>
 	
 	<style name="Text.EditLabel">
+	    <item name = "android:padding">10dp</item>
 	    <item name = "android:gravity">right</item>
 	    <item name = "android:layout_width">wrap_content</item>
 	    <item name = "android:layout_height">wrap_content</item>
