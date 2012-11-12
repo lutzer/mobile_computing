@@ -9,9 +9,12 @@
     <string name="title_activity_main">Book List</string>
     <string name="title_activity_summary">Book Summary</string>
     <string name="title_activity_book_detail">Book Details</string>
+
     <color name="background_color">#000000</color>
     <color name="font_color">#FFFFFF</color>
     <color name="selector_focused">#0000FF</color>
     <color name="selector_unfocused">#FF0000</color>
+
+    <string name="title_activity_book_list_fragment">BookListFragment</string>
 
 </resources>

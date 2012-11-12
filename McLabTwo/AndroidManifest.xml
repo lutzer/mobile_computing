@@ -15,7 +15,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
-            <intent-filter android:label="@string/app_name">
+            <intent-filter android:label="@string/app_name" >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,6 +33,15 @@
             android:label="@string/title_activity_book_detail" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".BookListFragment"
+            android:label="@string/title_activity_book_list_fragment" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

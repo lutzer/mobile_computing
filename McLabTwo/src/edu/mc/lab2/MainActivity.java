@@ -1,99 +1,34 @@
 package edu.mc.lab2;
 
-import java.util.ArrayList;
-
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-
-public class MainActivity extends SherlockActivity {
-	
-	/*
-	 *  Class holds the books for the listview
-	 */
-	private class BookAdapter extends ArrayAdapter<Book> {
-
-	    private ArrayList<Book> items;
-
-	    public BookAdapter(Context context, ArrayList<Book> items) {
-	            super(context, R.layout.book_row, items);
-	            this.items = items;
-	    }
-
-	    @Override
-	    public View getView(int position, View convertView, ViewGroup parent) {
-	            View v = convertView;
-	            if (v == null) {
-	                LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	                v = vi.inflate(R.layout.book_row, null);
-	            }
-	            Book book = items.get(position);
-	            if (book != null) {
-	                TextView author = (TextView) v.findViewById(R.id.author);
-	                TextView title = (TextView) v.findViewById(R.id.title);
-	                if (author != null)
-	                	author.setText(book.getAuthor());
-	                if(title != null)
-	                	title.setText(book.getTitle());
-	                
-	            }
-	            return v;
-	    }
-	}
-
-	SimpleBookManager bookManager;
-	
-	// holds the items for the listview
-	BookAdapter adapter;
+public class MainActivity extends SherlockFragmentActivity 
+	implements ActionBar.TabListener, BookListFragment.OnBookSelectedListener {
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        //enable back button
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-
-        bookManager = SimpleBookManager.getInstance();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);  //enable home button
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);  //enable tab bar
         
-    	ArrayList<Book> books = bookManager.getAllBooks(); 
-    	adapter = new BookAdapter(this,books);
-    	
-    	ListView listView =  ((ListView)findViewById(R.id.listView));
-    	listView.setAdapter(adapter);
-    	
-    	// link list with detail activity
-        listView.setOnItemClickListener(new OnItemClickListener() 
-        {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-			int position, long id) {
-				Intent intent = new Intent(getApplicationContext(), BookDetailActivity.class);
-				intent.putExtra("bookId", position);
-	        	startActivity(intent);
-			}
-        });
-        
+        //add tabs
+        actionBar.addTab(actionBar.newTab().setText("Book List").setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText("Summary").setTabListener(this));
     }
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -105,12 +40,69 @@ public class MainActivity extends SherlockActivity {
     {
          switch (item.getItemId())
          {
-         case R.id.Summary:
-        	 Intent intent = new Intent(getApplicationContext(), SummaryActivity.class);
-        	 startActivity(intent);
+         case R.id.Add:
+        	 /*Intent intent = new Intent(getApplicationContext(), SummaryFragment.class);
+        	 startActivity(intent);*/
         	 return true;
+         case android.R.id.home:
+        	 Intent intent = new Intent(this, MainActivity.class);
+             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+             startActivity(intent);
+             return true;
         default:
             return super.onOptionsItemSelected(item);
         }
     }
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		// When the given tab is selected, show the tab contents in the container
+		SherlockFragment fragment;
+		switch (tab.getPosition())
+		{
+		case 0:
+			Log.e("INFO","new bookk list fragment");
+			fragment = new BookListFragment();
+			break;
+		case 1:
+			Log.e("INFO","new summary fragment");
+			fragment = new SummaryFragment();
+			break;
+		default:
+			fragment = new SherlockFragment();		
+			return;
+		}
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, fragment)
+                .commit();
+		
+	}
+	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/*
+	 * gets called by the BookListFragment, if the user selects a book from the list
+	 */
+	public void onBookSelected(int position) {
+		SherlockFragment fragment = new BookDetailFragment();
+		Bundle args = new Bundle();
+		args.putInt("bookId", position);
+		fragment.setArguments(args);
+		
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.content, fragment);
+		// and add the transaction to the back stack
+		ft.addToBackStack(null);
+
+		// Commit the transaction
+		ft.commit();
+		
+	}
 }
