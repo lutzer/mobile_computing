@@ -132,7 +132,13 @@ public class BookDatabase {
 	}
 
 	public void saveBooks(ArrayList<Book> books) {
-		// first drop all data
+		
+		//first check if there were any changes
+		ArrayList<Book> booksInDb = getBooks();
+		if (books == booksInDb)
+			return; //dont do anything
+		
+		// drop all data
 		database.delete(sqlHelper.TABLE_NAME,null,null);
 		
 		// insert new data

@@ -44,8 +44,8 @@ public class MainActivity extends SherlockFragmentActivity
     
     
     @Override
-    protected void onSaveInstanceState (Bundle outState) {
-    	super.onSaveInstanceState(outState);
+    protected void onStop() {
+    	super.onStop();
     	
     	try {
 			bookManager.saveChanges();

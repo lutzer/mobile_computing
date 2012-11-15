@@ -1,5 +1,7 @@
 package edu.mc.lab2;
 
+import android.util.Log;
+
 public class Book {
 
 	private String author;
@@ -57,5 +59,25 @@ public class Book {
 	public void setCourse(String course) {
 		this.course = course;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	       // check for reference equality
+		Log.e("INFO","called equals");
+	       if(this == obj) return true;
+
+	       // type check
+	       if( !(obj instanceof Book) ) return false;
+
+	       Book book = (Book)obj;
+	       
+	       
+	       
+	       return (this.author == book.getAuthor()
+	    		   && this.title == book.getTitle()
+	    		   && this.course == book.getCourse()
+	    		   && this.price == book.getPrice()
+	    		   && this.isbn == book.getIsbn());
+	   }
 	
 }
