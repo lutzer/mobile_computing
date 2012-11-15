@@ -23,6 +23,6 @@ public interface BookManagerInterface {
 	
 	public int getTotalCost();
 	
-	public void saveChanges();
+	public void saveChanges() throws Exception;
 	
 }

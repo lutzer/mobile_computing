@@ -2,12 +2,16 @@ package edu.mc.lab2;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+
 
 public class SimpleBookManager implements BookManagerInterface {
 	
 	private static SimpleBookManager instance = null;
 
 	private ArrayList<Book> books;
+	
+	private BookDatabase database;
 	
 	private SimpleBookManager() {
 		
@@ -24,6 +28,7 @@ public class SimpleBookManager implements BookManagerInterface {
 		books.add(book4);
 		Book book5 = new Book("Daniel Kehlmann", "Die Vermessung der Welt", 25, "0123456", "German Literature");
 		books.add(book5);
+		
 	}
 	
 	public static SimpleBookManager getInstance() {
@@ -123,9 +128,28 @@ public class SimpleBookManager implements BookManagerInterface {
 	}
 
 	@Override
-	public void saveChanges() {
-		// TODO Auto-generated method stub
-
+	public void saveChanges() throws Exception {
+		if (database == null)
+			throw new Exception("Can not save data, no database connection");
+		
+		database.saveBooks(books);
+	}
+	
+	public void connectDatabase(Context context) {
+		if (database == null)
+			database = new BookDatabase(context);
+	}
+	
+	public void closeDatabase() {
+		if (database == null)
+			database.close();
+	}
+	
+	public void loadData() throws Exception {
+		if (database == null)
+			throw new Exception("Can not load data, no database connection");
+		
+		books = database.getBooks();
 	}
 	
 	public String getBookString(int index) {

@@ -7,6 +7,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +15,8 @@ import android.util.Log;
 
 public class MainActivity extends SherlockFragmentActivity 
 	implements ActionBar.TabListener, BookListFragment.OnBookSelectedListener {
+	
+	SimpleBookManager bookManager;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,35 @@ public class MainActivity extends SherlockFragmentActivity
         //add tabs
         actionBar.addTab(actionBar.newTab().setText("Book List").setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText("Summary").setTabListener(this));
+        
+        //connect to database and load books
+        bookManager = SimpleBookManager.getInstance();
+        bookManager.connectDatabase(getApplicationContext());
+        try {
+        	bookManager.loadData();
+        } catch (Exception e) {
+        	Log.e("Error","Cannot load data from database");
+       	 	finish();
+        }
+    }
+    
+    
+    @Override
+    protected void onSaveInstanceState (Bundle outState) {
+    	super.onSaveInstanceState(outState);
+    	
+    	try {
+			bookManager.saveChanges();
+		} catch (Exception e) {
+			Log.e("ERROR",e.getMessage());
+		}	
+    }
+    
+    @Override
+    protected void onDestroy() {
+    	super.onDestroy();
+    	
+    	bookManager.closeDatabase();
     }
     
     @Override

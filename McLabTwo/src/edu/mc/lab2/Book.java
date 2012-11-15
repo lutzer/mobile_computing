@@ -8,6 +8,8 @@ public class Book {
 	private String isbn;
 	private String course;
 	
+	public int id = -1; // -1 not in database
+	
 	public Book(String author, String title, int price, String isbn, String course) {
 		this.author = author;
 		this.title = title;
@@ -55,7 +57,5 @@ public class Book {
 	public void setCourse(String course) {
 		this.course = course;
 	}
-	
-	
 	
 }
