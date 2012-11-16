@@ -17,18 +17,6 @@ public class SimpleBookManager implements BookManagerInterface {
 		
 		books = new ArrayList<Book>();
 		
-		// add a few books
-		Book book1 = new Book("Michael Ende", "Momo", 22, "012", "Book Circle");
-		books.add(book1);
-		Book book2 = new Book("Johann Wolfgang von Goethe", "Die Leiden des Jungen Werther", 5, "0123", "German Literature");
-		books.add(book2);
-		Book book3 = new Book("William Gibson", "Neuromancer", 10, "01234", "Cyborgs and Post-Feminism");
-		books.add(book3);
-		Book book4 = new Book("Rafik Schami", "A Hand Full of Stars", 4, "012345", "The East");
-		books.add(book4);
-		Book book5 = new Book("Daniel Kehlmann", "Die Vermessung der Welt", 25, "0123456", "German Literature");
-		books.add(book5);
-		
 	}
 	
 	public static SimpleBookManager getInstance() {
@@ -56,7 +44,13 @@ public class SimpleBookManager implements BookManagerInterface {
 		Book newBook = new Book();
 		books.add(newBook);
 		
+		database.addBook(newBook);
+		
 		return newBook;
+	}
+	
+	public void updateBook(Book book) {
+		database.updateBook(book);
 	}
 
 	@Override
@@ -66,6 +60,7 @@ public class SimpleBookManager implements BookManagerInterface {
 
 	@Override
 	public void removeBook(Book book) {
+		database.deleteBook(book);
 		books.remove(book);
 	}
 
@@ -128,6 +123,9 @@ public class SimpleBookManager implements BookManagerInterface {
 	}
 
 	@Override
+	/*
+	 * drops the whole db and replaces them with the current arraylist
+	 */
 	public void saveChanges() throws Exception {
 		if (database == null)
 			throw new Exception("Can not save data, no database connection");

@@ -7,16 +7,13 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Book Manager</string>
     <string name="title_activity_book_detail">Book Details</string>
+    <string name="title_activity_book_list_fragment">BookListFragment</string>
+    <string name="title_activity_book_edit">Edit Book</string>
 
     <color name="background_color">#000000</color>
     <color name="font_color">#FFFFFF</color>
-    <color name="selector_focused">#0000FF</color>
-    <color name="selector_unfocused">#FF0000</color>
-    
-    <color name="edit_text_bg_color">#FFFFFF</color>
-    <color name="edit_text_bg_color_wrong_input">#ED9D9D</color>
+    <color name="selector_focused">#CC9900</color>
+    <color name="selector_unfocused">#000000</color>
 
-    <string name="title_activity_book_list_fragment">BookListFragment</string>
-    <string name="title_activity_book_edit">Edit Book</string>
 
 </resources>

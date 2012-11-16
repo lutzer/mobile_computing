@@ -97,6 +97,9 @@ public class BookEditActivity extends SherlockActivity {
 					book.setPrice(Float.valueOf(price.getText().toString()));
 					book.setIsbn(isbn.getText().toString());
 					
+					//update database
+					bookManager.updateBook(book);
+					
 					// quit activity
 					Intent intent = new Intent().putExtra("bookId", bookId);
 					setResult(1,intent);

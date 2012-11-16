@@ -10,7 +10,7 @@ public class Book {
 	private String isbn;
 	private String course;
 	
-	public int id = -1; // -1 not in database
+	public long id = -1; // -1 not in database
 	
 	public Book(String author, String title, int price, String isbn, String course) {
 		this.author = author;
@@ -59,25 +59,5 @@ public class Book {
 	public void setCourse(String course) {
 		this.course = course;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-	       // check for reference equality
-		Log.e("INFO","called equals");
-	       if(this == obj) return true;
-
-	       // type check
-	       if( !(obj instanceof Book) ) return false;
-
-	       Book book = (Book)obj;
-	       
-	       
-	       
-	       return (this.author == book.getAuthor()
-	    		   && this.title == book.getTitle()
-	    		   && this.course == book.getCourse()
-	    		   && this.price == book.getPrice()
-	    		   && this.isbn == book.getIsbn());
-	   }
 	
 }

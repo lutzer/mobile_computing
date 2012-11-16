@@ -47,11 +47,11 @@ public class MainActivity extends SherlockFragmentActivity
     protected void onStop() {
     	super.onStop();
     	
-    	try {
+    	/*try {
 			bookManager.saveChanges();
 		} catch (Exception e) {
 			Log.e("ERROR",e.getMessage());
-		}	
+		}*/	
     }
     
     @Override

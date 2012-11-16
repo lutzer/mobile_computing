@@ -117,6 +117,7 @@ public class BookDatabase {
 		book.setCourse(cursor.getString(cursor.getColumnIndex("course")));
 		book.setIsbn(cursor.getString(cursor.getColumnIndex("isbn")));
 		book.setPrice(cursor.getFloat(cursor.getColumnIndex("price")));
+		book.id = cursor.getLong(cursor.getColumnIndex("id"));
 		return book;
 	}
 	
@@ -133,11 +134,6 @@ public class BookDatabase {
 
 	public void saveBooks(ArrayList<Book> books) {
 		
-		//first check if there were any changes
-		ArrayList<Book> booksInDb = getBooks();
-		if (books == booksInDb)
-			return; //dont do anything
-		
 		// drop all data
 		database.delete(sqlHelper.TABLE_NAME,null,null);
 		
@@ -145,9 +141,22 @@ public class BookDatabase {
 		for (Book book : books) {
 			database.insert(sqlHelper.TABLE_NAME, null, createContentValues(book));
 		}
-		
-		Log.e("INFO","saved database");
-		
+	}
+
+	public void addBook(Book book) {
+		long id = database.insert(sqlHelper.TABLE_NAME, null, createContentValues(book));
+		book.id = id;
+		Log.e("INFO","book with id" + book.id + "added");
+	}
+
+	public void deleteBook(Book book) {
+		database.delete(sqlHelper.TABLE_NAME,"id=" + book.id,null);
+		Log.e("INFO","book with id" + book.id + "deleted");
+	}
+
+	public void updateBook(Book book) {
+		database.update(sqlHelper.TABLE_NAME,createContentValues(book),"id=" + book.id,null);
+		Log.e("INFO","book with id" + book.id + "updated");
 	}
 
 }
