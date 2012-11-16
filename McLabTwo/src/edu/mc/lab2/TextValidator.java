@@ -5,7 +5,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.TextView;
 
-
+/*
+ * class can validate input while typing (not used)
+ */
 public abstract class TextValidator implements TextWatcher {
     private TextView textView;
 

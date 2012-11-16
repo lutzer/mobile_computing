@@ -37,7 +37,7 @@ public class MainActivity extends SherlockFragmentActivity
         try {
         	bookManager.loadData();
         } catch (Exception e) {
-        	Log.e("Error","Cannot load data from database");
+        	Log.e("ERROR",e.getMessage());
        	 	finish();
         }
     }
@@ -46,12 +46,6 @@ public class MainActivity extends SherlockFragmentActivity
     @Override
     protected void onStop() {
     	super.onStop();
-    	
-    	/*try {
-			bookManager.saveChanges();
-		} catch (Exception e) {
-			Log.e("ERROR",e.getMessage());
-		}*/	
     }
     
     @Override
@@ -73,6 +67,7 @@ public class MainActivity extends SherlockFragmentActivity
          switch (item.getItemId())
          {
          case R.id.Add:
+        	 // start add book activity
         	 Intent intent = new Intent(getApplicationContext(), BookEditActivity.class);
         	 intent.putExtra("addBook", true);
         	 startActivity(intent);

@@ -108,6 +108,7 @@ public class BookListFragment extends SherlockFragment {
         }
     }
     
+    // check if the data set changed
     @Override
     public void onResume() {
     	adapter.notifyDataSetChanged();

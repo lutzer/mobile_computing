@@ -121,6 +121,10 @@ public class BookDatabase {
 		return book;
 	}
 	
+	
+	/*
+	 * creates ContentValues Object to write to database
+	 */
 	private static ContentValues createContentValues(Book book) {
 		ContentValues newCon = new ContentValues();
 		newCon.put("author", book.getAuthor());
@@ -132,6 +136,9 @@ public class BookDatabase {
 		return newCon;
 	}
 
+	/*
+	 * first deletes all books in db, then adds the whole array
+	 */
 	public void saveBooks(ArrayList<Book> books) {
 		
 		// drop all data
@@ -143,17 +150,26 @@ public class BookDatabase {
 		}
 	}
 
+	/*
+	 * adds a single row to the database
+	 */
 	public void addBook(Book book) {
 		long id = database.insert(sqlHelper.TABLE_NAME, null, createContentValues(book));
 		book.id = id;
 		Log.e("INFO","book with id" + book.id + "added");
 	}
 
+	/*
+	 *  deletes a single row
+	 */
 	public void deleteBook(Book book) {
 		database.delete(sqlHelper.TABLE_NAME,"id=" + book.id,null);
 		Log.e("INFO","book with id" + book.id + "deleted");
 	}
 
+	/*
+	 * updates a row in the database
+	 */
 	public void updateBook(Book book) {
 		database.update(sqlHelper.TABLE_NAME,createContentValues(book),"id=" + book.id,null);
 		Log.e("INFO","book with id" + book.id + "updated");

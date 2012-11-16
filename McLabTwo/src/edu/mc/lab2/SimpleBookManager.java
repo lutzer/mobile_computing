@@ -19,6 +19,9 @@ public class SimpleBookManager implements BookManagerInterface {
 		
 	}
 	
+	/*
+	 * get the instance of the singleton
+	 */
 	public static SimpleBookManager getInstance() {
         if (instance == null) {
             instance = new SimpleBookManager();
@@ -49,6 +52,11 @@ public class SimpleBookManager implements BookManagerInterface {
 		return newBook;
 	}
 	
+	/*
+	 * updates the database entry of book
+	 * (should be called after every change of data, 
+	 * else the book data will be reset on next restart)
+	 */
 	public void updateBook(Book book) {
 		database.updateBook(book);
 	}
@@ -125,6 +133,7 @@ public class SimpleBookManager implements BookManagerInterface {
 	@Override
 	/*
 	 * drops the whole db and replaces them with the current arraylist
+	 * (this function works but is not used for performance reasons)
 	 */
 	public void saveChanges() throws Exception {
 		if (database == null)
@@ -133,16 +142,25 @@ public class SimpleBookManager implements BookManagerInterface {
 		database.saveBooks(books);
 	}
 	
+	/*
+	 * connect to database, call this on programm start
+	 */
 	public void connectDatabase(Context context) {
 		if (database == null)
 			database = new BookDatabase(context);
 	}
 	
+	/*
+	 * close the connection to database, call this on exit
+	 */
 	public void closeDatabase() {
 		if (database == null)
 			database.close();
 	}
 	
+	/*
+	 * loads books from database
+	 */
 	public void loadData() throws Exception {
 		if (database == null)
 			throw new Exception("Can not load data, no database connection");
@@ -150,6 +168,9 @@ public class SimpleBookManager implements BookManagerInterface {
 		books = database.getBooks();
 	}
 	
+	/*
+	 * returns a string containing all the book values
+	 */
 	public String getBookString(int index) {
 		if (index >= books.size())
 			return null;

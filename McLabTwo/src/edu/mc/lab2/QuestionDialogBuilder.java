@@ -6,6 +6,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
+/*
+ * creates a dialog, and puts two buttons on the bottom
+ */
 public class QuestionDialogBuilder extends AlertDialog.Builder {
 	
 	public enum Buttons {

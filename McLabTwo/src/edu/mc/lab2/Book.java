@@ -10,7 +10,7 @@ public class Book {
 	private String isbn;
 	private String course;
 	
-	public long id = -1; // -1 not in database
+	public long id = -1; // the row id of the book in the database, -1 means: not in database
 	
 	public Book(String author, String title, int price, String isbn, String course) {
 		this.author = author;

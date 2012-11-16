@@ -39,6 +39,9 @@ public class BookDetailActivity extends SherlockActivity {
 	    
     }
     
+    /*
+     * setups all the textViews in the UI
+     */
     private void setupTextFields() {
     	
     	book = bookManager.getBook(bookId);
@@ -60,6 +63,8 @@ public class BookDetailActivity extends SherlockActivity {
          switch (item.getItemId())
          {
          case R.id.Remove:
+        	 
+        	 // create a questiondialog to make sure, the user wants to delete the book
         	 QuestionDialogBuilder builder = new QuestionDialogBuilder(this,"Remove Book",
         			 "Do you really want to remove " +book.getTitle()+ " from the library?",
         			 QuestionDialogBuilder.Buttons.YesNo);
@@ -78,6 +83,7 @@ public class BookDetailActivity extends SherlockActivity {
         	 dialog.show();
         	 return true;
          case R.id.Edit:
+        	 // start edit activity and requests a result for returning to this view
         	 Intent intent = new Intent(getApplicationContext(), BookEditActivity.class);
         	 intent.putExtra("bookId", bookId);
         	 startActivityForResult(intent,REQUEST_CODE);
@@ -97,6 +103,10 @@ public class BookDetailActivity extends SherlockActivity {
         return super.onCreateOptionsMenu(menu);
     }
     
+    /*
+     * if returning from edit activity, get the bookId of the edited book 
+     * and update the textviews
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
       super.onActivityResult(requestCode, resultCode, data);

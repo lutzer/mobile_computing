@@ -38,11 +38,11 @@ public class BookEditActivity extends SherlockActivity {
         //get book
 	    Bundle args = getIntent().getExtras();
 	    if(args !=null)
-	    	if (args.getBoolean("addBook")) {
+	    	if (args.getBoolean("addBook")) { // call this when the user wants to add a new book
 	    		bookId = bookManager.count();
 	    		book = new Book();
 	    		addNewBook = true;
-	    	} else {
+	    	} else { // call this, if the user wants to edit an existing book
 	    		bookId = args.getInt("bookId");
 	    		book = bookManager.getBook(bookId);
 	    		addNewBook = false;
@@ -128,7 +128,7 @@ public class BookEditActivity extends SherlockActivity {
     }
     
     /*
-     * validate the input fields
+     * validate the title field
      */
     private boolean validateInput() {
     	if (title.getText().length() < 1) {
