@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SliderSwitch">
+        <attr name="number_of_elements" format="integer" />
+    </declare-styleable>
+
+</resources>

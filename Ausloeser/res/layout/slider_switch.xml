@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:orientation="vertical">
+    
+    <RelativeLayout
+        android:id="@+id/relLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+      
+	<LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/sliderLayout"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/slider_switch_bg"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+               <!--  <include layout="@layout/spacer"/>
+               <include layout="@layout/slider_switch_line_dot"/>
+               <include layout="@layout/spacer"/>
+               <include layout="@layout/slider_switch_line_dot"/>
+               <include layout="@layout/spacer"/>-->
+                
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/sliderKnob"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:background="@drawable/slider_switch_knob"
+            android:src="@null" />
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:id="@+id/labelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+
+        <!--  <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:text="Label" />-->
+
+    </LinearLayout>
+    
+</LinearLayout>
