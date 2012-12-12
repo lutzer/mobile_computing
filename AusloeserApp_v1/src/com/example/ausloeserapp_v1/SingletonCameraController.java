@@ -1,8 +1,6 @@
 package com.example.ausloeserapp_v1;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.os.CountDownTimer;
 
@@ -17,9 +15,11 @@ public enum SingletonCameraController{
 	INSTANCE;
 	
 	private SignalGenerationThread signalGen;
-	
-	private Timer delayTimer, exposureTimer;
+
 	private CountDownTimer sendDelayCdTimer, sendExposureCdTimer;
+	
+	//takes all registered listeners
+	ArrayList<OnDelayExposureTimerListener> listeners = new ArrayList<OnDelayExposureTimerListener>();
 
 	/**
 	 * Camera is just triggered once ()
@@ -50,10 +50,6 @@ public enum SingletonCameraController{
 			
 			public void triggerStop(){
 				
-				//Timers are cancelled to stop the according Threads
-				delayTimer.cancel();
-				exposureTimer.cancel();
-				
 				if(signalGen!= null){
 					signalGen.stopSound();
 				}
@@ -71,9 +67,9 @@ public enum SingletonCameraController{
 	 * 
 	 * @param exposureTime
 	 * @param delayTime
-	 */
-	private void generateDelay(final long exposureTime, final long delayTime){
+	 */  void generateDelay(final long exposureTime, final long delayTime){
 		//makes it send every 40 milliseconds (ca 35 frames/sec on the statusbar)
+		 
 		sendDelayCdTimer = new CountDownTimer(delayTime, 40) {
 
 		     public void onTick(long millisUntilFinished) {
@@ -82,57 +78,39 @@ public enum SingletonCameraController{
 
 		     public void onFinish() {
 		    	 sendTimerDelay(0, delayTime);
-		     }
-		  }.start();
-		
-		delayTimer = new Timer();
-		delayTimer.schedule(new TimerTask(){
-			@Override
-			public void run(){
-				sendDelayCdTimer.cancel();
 				generateExposure(exposureTime);
 			}
-		}, delayTime);
+		}.start();
 	}
-	
-	
+
 	/**
-	 * Timer to trigger for a certain exposure time, other Timer to send events to calling class
+	 * Timer to trigger for a certain exposure time, other Timer to send events
+	 * to calling class
 	 * 
 	 * @param exposureTime
 	 */
 	private void generateExposure(final long exposureTime){
+		
+		sendDelayCdTimer.cancel();
 		//Camera is triggered
 		triggerUnlimited();
 		
 		//makes it send every 40 milliseconds (ca 35 frames/sec on the statusbar)
-//		sendExposureCdTimer = new CountDownTimer(exposureTime, 40) {
-//
-//		     public void onTick(long millisUntilFinished) {
-//		         sendTimerExposure(millisUntilFinished, exposureTime);
-//		     }
-//
-//		     public void onFinish() {
-//		    	 sendTimerExposure(0, exposureTime);
-//		     }
-//		  }.start();
-//		
+		sendExposureCdTimer = new CountDownTimer(exposureTime, 40) {
 
-		
-		exposureTimer = new Timer();
-		exposureTimer.schedule(new TimerTask(){
-			@Override
-			public void run(){
-				//sendExposureCdTimer.cancel();
-				triggerStop();
-				
-			}
-		}, exposureTime);
-		
+		     public void onTick(long millisUntilFinished) {
+		         sendTimerExposure(millisUntilFinished, exposureTime);
+		     }
+
+		     public void onFinish() {
+		    	 sendTimerExposure(0, exposureTime);
+		    	 triggerStop();
+		    	 //TODO sendExposureCdTimer.cancel();
+		     }
+		  }.start();
 		
 	}
 	
-	ArrayList<OnDelayExposureTimerListener> listeners = new ArrayList<OnDelayExposureTimerListener>();
 	
 	
 	public void setOnTimerUpdateListener(OnDelayExposureTimerListener listener){
