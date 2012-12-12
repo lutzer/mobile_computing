@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="app_name">Auslöser App v1</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_remote_control">Remote Control</string>
+
+    
+    
+<!--BUTTON LABELS REMOTE VIEW-->
+	<string name="labelButtonSimple">SIMPLE</string>
+	<string name="labelButtonDelay">DELAY</string>
+	<string name="labelButtonHold">HOLD</string>
+	<string name="labelButtonBulb">BULB</string>
+<!--SLIDER LABELS REMOTE VIEW-->
+	<string name="labelTimeOpen">Time Shutter Open</string>
+	<string name="labelTimeRemaining">Time Exposure Remaining</string>
+	<string name="labelCheckBoxExposure">Control Exposure</string>
+	<string name="labelTextViewExposure">Exposure</string>
+	<string name="textViewLabelDelay">Delay</string>
+
+</resources>
