@@ -3,22 +3,34 @@ package com.ausloeser.screens;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.ausloeser.views.Utils;
 
 public class MainActivity extends SherlockActivity {
 	
 	private class Mode {
 		
 		int id;
+		String title,description,imgPath;
+		
+		public Mode(int id, String title, String descpription, String imgPath) {
+			this.id = id;
+			this.title = title;
+			this.description = descpription;
+			this.imgPath = imgPath;
+		}
+		
 	}
 	
 	private class ListAdapter extends ArrayAdapter<Mode> {
@@ -39,13 +51,8 @@ public class MainActivity extends SherlockActivity {
 	            }
 	            Mode mode = items.get(position);
 	            if (mode != null) {
-	                /*TextView author = (TextView) v.findViewById(R.id.author);
-	                TextView title = (TextView) v.findViewById(R.id.title);
-	                if (author != null)
-	                	author.setText(book.getAuthor());
-	                if(title != null)
-	                	title.setText(book.getTitle());*/
-	                
+	                ((TextView) v.findViewById(R.id.title)).setText(mode.title);
+	                ((TextView) v.findViewById(R.id.description)).setText(mode.description);     
 	            }
 	            return v;
 	    }
@@ -57,11 +64,20 @@ public class MainActivity extends SherlockActivity {
 		setContentView(R.layout.activity_main);
 		
 		//ActionBar actionBar = getSupportActionBar();
+		
+		Utils.applyFonts(findViewById(R.id.titleStripe),Typeface.createFromAsset(getAssets(),"fonts/eurostile.ttf"));
+		
 	}
 	
 	private void populateList() {
-		//ListView listView =  ((ListView) view.findViewById(R.id.listView));
-    	//listView.setAdapter(adapter);
+		ListView listView =  ((ListView) findViewById(R.id.listView));
+		
+		ArrayList<Mode> modes = new ArrayList<Mode>();
+		
+		modes.add(new Mode(0,"Cable Release","Lets you remote-trigger your camera in simple, bulb or delayed mode.","test"))
+		
+		
+    	//listView.setAdapter(new ListAdapter(,modes));
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item)

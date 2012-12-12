@@ -1,17 +1,42 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    style="@style/MainTheme" >
-
+    style="@style/MainTheme" 
+    android:orientation="vertical">
+    
+    <LinearLayout 
+        android:id="@+id/titleStripe"
+        style="@style/View.TitleStripe">
+        
+        <ImageView 
+            android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:background="@drawable/title_stripe"
+    		android:layout_weight="1"
+    	/>
+        
+        <TextView
+            style="@style/Text.TitleStripe"
+            android:text="MAIN" />
+        
+        <ImageView 
+            android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:background="@drawable/title_stripe"
+    		android:layout_weight="1"
+    	/>
+        
+    </LinearLayout>
+    
     <ListView
 	    android:id="@+id/listView"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:scrollbars="vertical" 
 	    android:divider="@null"
-		android:dividerHeight="10dp">
-	</ListView>
+		android:dividerHeight="10dp"
+		style="@style/View.List"/>
 
-</RelativeLayout>
+</LinearLayout>
