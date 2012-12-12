@@ -9,5 +9,13 @@
 	    <item name="background">@drawable/actionbar_bg</item>
 	    
 	</style>
+	
+	<style name="MainTheme">
+	    <item name ="android:background">@drawable/app_bg</item>
+	</style>
+	
+	<style name="ListStyle">
+	    
+	</style>
 
 </resources>

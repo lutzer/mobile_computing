@@ -19,9 +19,6 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-import edu.mc.lab2.Book;
-import edu.mc.lab2.R;
-
 public class MainActivity extends SherlockActivity {
 
 	@Override
@@ -35,7 +32,6 @@ public class MainActivity extends SherlockActivity {
 	private void populateList() {
 		//ListView listView =  ((ListView) view.findViewById(R.id.listView));
     	//listView.setAdapter(adapter);
-		
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item)
