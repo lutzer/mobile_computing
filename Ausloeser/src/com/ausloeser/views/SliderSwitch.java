@@ -230,6 +230,28 @@ public class SliderSwitch extends FrameLayout {
 		switchListeners.add(listener);
 	}
 	
+	/*
+	 * sets the slider to a snapping position
+	 */
+	public void setSliderPosition(int position) {
+		if (position>-1 && position < numberOfElements) {
+			
+			/*knobPosition = spaceBetweenElements * position;
+        	knobPosition = Utils.inRange(knobPosition, 0, sliderWidth-knobWidth);
+        	RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(sliderKnob.getWidth(),sliderKnob.getHeight());
+        	params.setMargins(knobPosition, 0, 0, 0);
+			sliderKnob.setLayoutParams(params);*/
+			currentSliderPosition = position;
+			
+			for (OnSliderSwitchChangeListener listener : switchListeners) 
+        	{
+        	   listener.onStopTrackingTouch(currentSliderPosition);
+        	   listener.onProgressChanged(currentSliderPosition);
+        	}
+			
+		}
+	}
+	
 	
 
 }

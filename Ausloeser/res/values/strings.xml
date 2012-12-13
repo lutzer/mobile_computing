@@ -9,5 +9,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_cable_remote">CableRemote</string>
+    <string name="title_activity_simple_cable_remote_fragment">SimpleCableRemoteFragment</string>
 
 </resources>

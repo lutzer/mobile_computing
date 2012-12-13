@@ -7,8 +7,13 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.widget.TextView;
+
+import com.ausloeser.views.SliderSwitch;
+import com.ausloeser.views.Utils;
 
 public class CableRemoteActivity extends SherlockFragmentActivity {
 
@@ -18,6 +23,57 @@ public class CableRemoteActivity extends SherlockFragmentActivity {
 		setContentView(R.layout.activity_cable_remote);
 		// Show the Up button in the action bar.
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		
+		
+		// setup slider switch to select the modes
+		String[] labels = { "Simple", "Delay", "Bulb", "Hold" }; 
+		SliderSwitch sliderSwitch = (SliderSwitch) findViewById(R.id.sliderSwitch);
+		sliderSwitch.setLabelTexts(labels);
+		sliderSwitch.setOnSliderSwitchChangeListener(new SliderSwitch.OnSliderSwitchChangeListener() {
+
+			@Override
+			public void onProgressChanged(int snappedPosition) {
+				// When the given tab is selected, show the tab contents in the container
+				SherlockFragment fragment = null;
+				switch (snappedPosition)
+				{
+				case 0:
+					fragment = new SimpleCableRemoteFragment();
+					break;
+				case 1:
+					//fragment = new SummaryFragment();
+					break;
+				default:
+					//fragment = new SherlockFragment();		
+					return;
+				}
+				if (fragment != null)
+					getSupportFragmentManager().beginTransaction()
+						.replace(R.id.content, fragment)
+						.commit();
+			}
+
+			@Override
+			public void onStartTrackingTouch(int snappedPosition) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onStopTrackingTouch(int snappedPosition) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+
+		sliderSwitch.setSliderPosition(0);
+		
+		// apply fonts
+		Utils.applyFonts(findViewById(R.id.titleStripe),Typeface.createFromAsset(getAssets(),"fonts/eurostile.ttf"));
+				
 	}
 
 	@Override

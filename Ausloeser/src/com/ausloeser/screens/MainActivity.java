@@ -96,6 +96,9 @@ public class MainActivity extends SherlockActivity {
 		modes.add(new Mode(	"Timelapse",
 							"Set your remote up for recording timelapses",
 							"img/modes/timelapse.png"));
+		modes.add(new Mode(	"Test",
+				"just at test mode",
+				"img/modes/timelapse.png"));
 
 
 		ListView listView =  ((ListView) findViewById(R.id.listView));

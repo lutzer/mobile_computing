@@ -1,14 +1,46 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res/com.ausloeser.screens"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CableRemoteActivity" >
-
-    <TextView
-        android:layout_width="wrap_content"
+    tools:context=".CableRemoteActivity" 
+    style="@style/MainTheme"
+    android:orientation="vertical">
+    
+    <LinearLayout 
+        android:id="@+id/titleStripe"
+        style="@style/View.TitleStripe">
+        
+        <ImageView 
+            android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:background="@drawable/title_stripe"
+    		android:layout_weight="1"
+    	/>
+        
+        <TextView
+            style="@style/Text.TitleStripe"
+            android:text="MODE" />
+        
+        <ImageView 
+            android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:background="@drawable/title_stripe"
+    		android:layout_weight="1"
+    	/>
+        
+    </LinearLayout>
+    
+    <com.ausloeser.views.SliderSwitch
+        android:id="@+id/sliderSwitch"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        style="@style/View"
+        custom:number_of_elements="4" />
+    
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-</RelativeLayout>
+</LinearLayout>

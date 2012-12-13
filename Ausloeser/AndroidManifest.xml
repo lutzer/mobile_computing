@@ -30,6 +30,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ausloeser.screens.MainActivity" />
         </activity>
+        <activity
+            android:name="com.ausloeser.screens.SimpleCableRemoteFragment"
+            android:label="@string/title_activity_simple_cable_remote_fragment" >
+        </activity>
     </application>
 
 </manifest>
