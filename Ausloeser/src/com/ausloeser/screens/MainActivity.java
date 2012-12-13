@@ -1,14 +1,17 @@
 package com.ausloeser.screens;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -51,9 +54,20 @@ public class MainActivity extends SherlockActivity {
 	            }
 	            Mode mode = items.get(position);
 	            if (mode != null) {
-	                ((TextView) v.findViewById(R.id.title)).setText(mode.title);
-	                ((TextView) v.findViewById(R.id.description)).setText(mode.description);     
+	            	((TextView) v.findViewById(R.id.title)).setText(mode.title);
+	            	((TextView) v.findViewById(R.id.description)).setText(mode.description);
+	            	
+	            	try {
+	            		InputStream ims = getAssets().open(mode.imgPath);
+	            		Drawable img = Drawable.createFromStream(ims, null);
+	            		((ImageView) v.findViewById(R.id.image)).setImageDrawable(img);
+	            	} catch(Exception e) {
+	            		;
+	            	}
 	            }
+	            
+	            // apply font
+	            Utils.applyFonts(v,Typeface.createFromAsset(getAssets(),"fonts/eurostile.ttf"));
 	            return v;
 	    }
 	}
@@ -65,19 +79,26 @@ public class MainActivity extends SherlockActivity {
 		
 		//ActionBar actionBar = getSupportActionBar();
 		
+		populateList();
+		
+		// apply fonts
 		Utils.applyFonts(findViewById(R.id.titleStripe),Typeface.createFromAsset(getAssets(),"fonts/eurostile.ttf"));
 		
 	}
 	
 	private void populateList() {
-		ListView listView =  ((ListView) findViewById(R.id.listView));
 		
 		ArrayList<Mode> modes = new ArrayList<Mode>();
-		
-		modes.add(new Mode(0,"Cable Release","Lets you remote-trigger your camera in simple, bulb or delayed mode.","test"))
-		
-		
-    	//listView.setAdapter(new ListAdapter(,modes));
+		modes.add(new Mode(	0,"Cable Release",
+							"Lets you trigger your camera in simple, bulb or delayed mode.",
+							"img/modes/cable_select.png"));
+		modes.add(new Mode(	1,"Timelapse",
+				"Set your remote up for recording timelapses",
+				"img/modes/timelapse.png"));
+
+
+		ListView listView =  ((ListView) findViewById(R.id.listView));
+		listView.setAdapter(new ListAdapter(this,modes));
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item)
