@@ -4,16 +4,19 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -24,11 +27,9 @@ public class MainActivity extends SherlockActivity {
 	
 	private class Mode {
 		
-		int id;
 		String title,description,imgPath;
 		
-		public Mode(int id, String title, String descpription, String imgPath) {
-			this.id = id;
+		public Mode(String title, String descpription, String imgPath) {
 			this.title = title;
 			this.description = descpription;
 			this.imgPath = imgPath;
@@ -89,16 +90,29 @@ public class MainActivity extends SherlockActivity {
 	private void populateList() {
 		
 		ArrayList<Mode> modes = new ArrayList<Mode>();
-		modes.add(new Mode(	0,"Cable Release",
+		modes.add(new Mode(	"Cable Remote",
 							"Lets you trigger your camera in simple, bulb or delayed mode.",
 							"img/modes/cable_select.png"));
-		modes.add(new Mode(	1,"Timelapse",
-				"Set your remote up for recording timelapses",
-				"img/modes/timelapse.png"));
+		modes.add(new Mode(	"Timelapse",
+							"Set your remote up for recording timelapses",
+							"img/modes/timelapse.png"));
 
 
 		ListView listView =  ((ListView) findViewById(R.id.listView));
 		listView.setAdapter(new ListAdapter(this,modes));
+		
+		// link list with opening the new activity
+        listView.setOnItemClickListener(new OnItemClickListener() 
+        {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+			int position, long id) {
+		        if (position==0) { 
+		        	Intent intent = new Intent(getApplicationContext(), CableRemoteActivity.class);
+		        	startActivity(intent);
+		        }
+			}
+        });
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item)
