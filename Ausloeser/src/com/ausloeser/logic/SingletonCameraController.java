@@ -1,4 +1,4 @@
-package com.example.ausloeserapp_v1;
+package com.ausloeser.logic;
 
 import java.util.ArrayList;
 
