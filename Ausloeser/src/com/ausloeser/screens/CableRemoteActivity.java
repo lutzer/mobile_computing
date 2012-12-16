@@ -42,7 +42,7 @@ public class CableRemoteActivity extends SherlockFragmentActivity {
 					fragment = new SimpleCableRemoteFragment();
 					break;
 				case 1:
-					//fragment = new SummaryFragment();
+					fragment = new DelayCableRemoteFragment();
 					break;
 				default:
 					//fragment = new SherlockFragment();		

@@ -15,12 +15,16 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.SeekBar;
 import android.widget.ToggleButton;
 
-public class SimpleCableRemoteFragment extends SherlockFragment {
+/**
+ * Class holds the fragment for the delayed cable remote mode
+ * @author Arnim Jepsen and Lutz Reiter
+ */
+public class DelayCableRemoteFragment extends SherlockFragment {
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_simple_cable_remote, container, false);
+		View view = inflater.inflate(R.layout.fragment_delay_cable_remote, container, false);
 	    
 		final ToggleButton buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
 		final SeekBar sliderExposure = (SeekBar) view.findViewById(R.id.SliderExposure);
@@ -35,6 +39,7 @@ public class SimpleCableRemoteFragment extends SherlockFragment {
 			}
 			
 		});
+		buttonExposure.toggle(); //call upper method once
 		
 		// apply fonts
 		Utils.applyFonts(view.findViewById(R.id.mainLayout),Typeface.createFromAsset(getActivity().getAssets(),"fonts/eurostile.ttf"));

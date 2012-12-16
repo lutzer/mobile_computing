@@ -1,0 +1,111 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SimpleCableRemoteFragment" 
+    style="@style/MainTheme"
+    android:orientation="vertical"
+    android:id="@+id/mainLayout">
+        
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical"
+    	style="@style/View"
+    	android:padding="0dp">
+    	
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:gravity="center_vertical"
+            android:padding="0dp">
+        	
+             <ToggleButton
+                 android:id="@+id/ButtonExposure"
+                 style="@style/Item.Checkbox"
+                 android:layout_marginLeft="0dp"/>
+             
+             <TextView
+                 style="@style/Text.ButtonLabel"
+                 android:text="Exposure" />
+             
+             <View style="@style/Spacer"/>
+             
+             <TextView
+                 style="@style/Text.SliderLabel"
+                 android:text="35s"/>
+             
+             <Button
+                 android:id="@+id/ButtonExposureSelect"
+                 style="@style/Item.Button"
+                 android:layout_marginRight="0dp"/>
+            
+   		 </LinearLayout>
+   		 
+        <SeekBar
+            android:id="@+id/SliderExposure"
+            style="@style/Item.Slider"
+            android:max="20"
+            android:progress="0"/>
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical"
+    	style="@style/View"
+    	android:padding="0dp">
+    	
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:gravity="center_vertical"
+            android:padding="0dp">
+        	
+             <TextView
+                 style="@style/Text.SliderName"
+                 android:text="Delay" />
+             
+             <View style="@style/Spacer"/>
+             
+             <TextView
+                 style="@style/Text.SliderLabel"
+                 android:text="35s"/>
+             
+             <Button
+                 android:id="@+id/ButtonDelaySelect"
+                 style="@style/Item.Button"
+                 android:layout_marginRight="0dp"/>
+            
+   		 </LinearLayout>
+   		 
+        <SeekBar
+            android:id="@+id/SliderDelay"
+            style="@style/Item.Slider"
+            android:max="20"
+            android:progress="0"/>
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="fill_parent"
+    	android:orientation="vertical"
+    	style="@style/View"
+    	android:gravity="center_horizontal|bottom">
+               
+        <TextView
+            style="@style/Text.TitleStripe"
+            android:text="TRIGGER" />
+        
+        
+        <Button style="@style/Item.ShutterButton" />
+        
+    </LinearLayout>
+
+    
+
+</LinearLayout>
