@@ -44,22 +44,26 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 	
 	View controlLayout,progressLayout;
 	
+	SingletonCameraController cameraControler;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_simple_cable_remote, container, false);
 		
+		//init camera controller
+		cameraControler = SingletonCameraController.INSTANCE;
+		
+		// get view vars
 		sliderExposure = (SeekBar) view.findViewById(R.id.SliderExposure);
 		buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
 		labelExposure = (TextView) view.findViewById(R.id.LabelExposure);
 		progressExposure = (ProgressBar) view.findViewById(R.id.ProgressExposure);
 		labelExposureProgress = (TextView) view.findViewById(R.id.LabelExposureProgress);
-		
 		controlLayout = view.findViewById(R.id.ControlsLayout); // holds sliders and buttons
 		progressLayout = view.findViewById(R.id.ProgressLayout); // holds progress bars
 		
+		//setup listeners
 		final Button buttonExposureSelect = (Button) view.findViewById(R.id.ButtonExposureSelect);
-
-		//setup listeners	
 		buttonExposureSelect.setOnClickListener(this);
 		((Button) view.findViewById(R.id.triggerButton)).setOnClickListener(this);
 		sliderExposure.setOnSeekBarChangeListener(this);
