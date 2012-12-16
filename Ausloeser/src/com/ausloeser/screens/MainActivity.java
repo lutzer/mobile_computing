@@ -96,9 +96,15 @@ public class MainActivity extends SherlockActivity {
 		modes.add(new Mode(	"Timelapse",
 							"Set your remote up for recording timelapses",
 							"img/modes/timelapse.png"));
-		modes.add(new Mode(	"Test",
-				"just at test mode",
-				"img/modes/timelapse.png"));
+		modes.add(new Mode(	"Soundtrap",
+						"just at test mode",
+						"img/modes/clapping.png"));
+		modes.add(new Mode(	"Just Fire",
+				"Exposes as hast as your camera supports.",
+				"img/modes/cannon.png"));
+		modes.add(new Mode(	"Cameratrap",
+				"Triggers whenever someone walks into the frame",
+				"img/modes/siren.png"));
 
 
 		ListView listView =  ((ListView) findViewById(R.id.listView));
@@ -112,6 +118,9 @@ public class MainActivity extends SherlockActivity {
 			int position, long id) {
 		        if (position==0) { 
 		        	Intent intent = new Intent(getApplicationContext(), CableRemoteActivity.class);
+		        	startActivity(intent);
+		        }else if(position == 3){
+		        	Intent intent = new Intent(getApplicationContext(), JustFireActivity.class);
 		        	startActivity(intent);
 		        }
 			}
