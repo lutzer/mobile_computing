@@ -77,7 +77,7 @@
              
              <Button
                  android:id="@+id/ButtonDelaySelect"
-                 style="@style/Item.Button"
+                 style="@style/Item.ButtonNumberInput"
                  android:layout_marginRight="0dp"/>
             
    		 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.ausloeser.screens;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,13 +25,16 @@ import com.ausloeser.views.Utils;
  */
 public class SimpleCableRemoteFragment extends SherlockFragment implements OnClickListener{
 
-
+	ToggleButton buttonExposure;
+	SeekBar sliderExposure;
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_simple_cable_remote, container, false);
 	    
-		final ToggleButton buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
-		final SeekBar sliderExposure = (SeekBar) view.findViewById(R.id.SliderExposure);
+		buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
+		sliderExposure = (SeekBar) view.findViewById(R.id.SliderExposure);
 		final Button buttonExposureSelect = (Button) view.findViewById(R.id.ButtonExposureSelect);
 		final Button buttonTrigger = (Button) view.findViewById(R.id.triggerButton);
 
@@ -65,5 +69,40 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 		
 		}
 		
+	}
+	
+	/**
+	 *  loads the shared preferences settings
+	 */
+	private void loadSettings() {
+		// read preferences
+		SharedPreferences prefs = getActivity().getSharedPreferences(
+				"com.ausloeser.app", getActivity().MODE_PRIVATE);
+		sliderExposure.setProgress(prefs.getInt("CableRemoteExposure", 0));
+		buttonExposure.setChecked(prefs.getBoolean("CoableRemoteExposureExposureChecked", false));
+	}
+	
+	
+	/**
+	 *  saves the shared preferences settings
+	 */
+	private void saveSettings() {
+		SharedPreferences prefs = getActivity().getSharedPreferences(
+				"com.ausloeser.app", getActivity().MODE_PRIVATE);
+		prefs.edit().putInt("CableRemoteExposure", sliderExposure.getProgress()).commit();
+		prefs.edit().putBoolean("CoableRemoteExposureExposureChecked", buttonExposure.isChecked()).commit();
+
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		saveSettings();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		loadSettings();
 	}
 }

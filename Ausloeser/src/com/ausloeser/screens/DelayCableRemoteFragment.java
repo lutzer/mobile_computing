@@ -48,10 +48,6 @@ public class DelayCableRemoteFragment extends SherlockFragment {
 		});
 		buttonExposure.toggle(); //call upper method once
 		
-
-		//load settings
-		loadSettings();
-		
 		// apply fonts
 		Utils.applyFonts(view.findViewById(R.id.mainLayout),Typeface.createFromAsset(getActivity().getAssets(),"fonts/eurostile.ttf"));
 
@@ -59,12 +55,6 @@ public class DelayCableRemoteFragment extends SherlockFragment {
 		return view;
 	}
 	
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		saveSettings();
-	}
 	
 	/**
 	 *  loads the shared preferences settings
@@ -89,6 +79,19 @@ public class DelayCableRemoteFragment extends SherlockFragment {
 		prefs.edit().putBoolean("CoableRemoteExposureExposureChecked", buttonExposure.isChecked()).commit();
 		prefs.edit().putInt("CoableRemoteExposureDelay", sliderDelay.getProgress()).commit();
 
+	}
+	
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		saveSettings();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		loadSettings();
 	}
 	
 }

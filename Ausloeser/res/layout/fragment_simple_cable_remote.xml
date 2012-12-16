@@ -38,7 +38,7 @@
              
              <Button
                  android:id="@+id/ButtonExposureSelect"
-                 style="@style/Item.Button"
+                 style="@style/Item.ButtonNumberInput"
                  android:layout_marginRight="0dp"/>
             
    		 </LinearLayout>
@@ -50,6 +50,7 @@
             android:progress="0"/>
         
     </LinearLayout>
+    
     <LinearLayout 
         android:layout_width="match_parent"
     	android:layout_height="fill_parent"
