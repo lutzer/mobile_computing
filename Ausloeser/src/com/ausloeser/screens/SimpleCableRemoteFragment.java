@@ -117,6 +117,10 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 				cameraControler.triggerExposure(exposureTime);
 			}
 			break;
+			
+//		case R.id.ButtonExposure:
+//			
+//			break;
 		}
 	}
 	
