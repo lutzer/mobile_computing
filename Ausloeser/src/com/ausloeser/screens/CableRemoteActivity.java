@@ -7,6 +7,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -17,6 +18,8 @@ import com.ausloeser.views.Utils;
 
 public class CableRemoteActivity extends SherlockFragmentActivity {
 
+	SliderSwitch sliderSwitch;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,7 +31,7 @@ public class CableRemoteActivity extends SherlockFragmentActivity {
 		
 		// setup slider switch to select the modes
 		String[] labels = { "Simple", "Delay", "Bulb", "Hold" }; 
-		SliderSwitch sliderSwitch = (SliderSwitch) findViewById(R.id.sliderSwitch);
+		sliderSwitch = (SliderSwitch) findViewById(R.id.sliderSwitch);
 		sliderSwitch.setLabelTexts(labels);
 		sliderSwitch.setOnSliderSwitchChangeListener(new SliderSwitch.OnSliderSwitchChangeListener() {
 
@@ -98,6 +101,27 @@ public class CableRemoteActivity extends SherlockFragmentActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		// load settings
+		SharedPreferences prefs = getSharedPreferences(
+				"com.ausloeser.app", this.MODE_PRIVATE);
+		sliderSwitch.setSliderPosition(prefs.getInt("CableRemoteMode", 0));
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		
+		// save settings
+		SharedPreferences prefs = getSharedPreferences(
+				"com.ausloeser.app", this.MODE_PRIVATE);
+		prefs.edit().putInt("CableRemoteMode", sliderSwitch.getSliderPosition()).commit();
+		
 	}
 
 }

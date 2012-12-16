@@ -58,6 +58,16 @@
 	    <item name="android:text"></item>
 	</style>
 	
+	<style name="Item.ButtonNumberInput">
+	    <item name="android:layout_width">48dp</item>
+	    <item name="android:layout_height">48dp</item>
+	    <item name="android:background">@drawable/button</item>
+	    <item name="android:text">#</item>
+	    <item name="android:textColor">#FFFFFF</item>
+	    <item name="android:textSize">18sp</item>
+	    <item name="android:textStyle">bold</item>
+	</style>
+	
 	<style name="Item.ShutterButton">
 	    <item name="android:layout_width">120dp</item>
 	    <item name="android:layout_height">120dp</item>
@@ -104,13 +114,6 @@
 	    <item name="android:maxLines">3</item>    
 	</style>
 	
-	<style name="Text.ButtonLabel">
-	    <item name="android:layout_height">match_parent</item>
-	    <item name="android:layout_width">wrap_content</item>
-	    <item name="android:gravity">center</item>
-		<item name="android:textSize">16sp</item>
-	</style>
-	
 	<style name="Text.SliderLabel">
 	    <item name="android:layout_height">match_parent</item>
 	    <item name="android:layout_width">wrap_content</item>
@@ -118,12 +121,15 @@
 		<item name="android:textSize">16sp</item>
 	</style>
 	
-	<style name="Text.SliderName">
+	<style name="Text.SliderNameWithButton">
 	    <item name="android:layout_height">match_parent</item>
 	    <item name="android:layout_width">wrap_content</item>
 	    <item name="android:gravity">center</item>
-		<item name="android:textSize">16sp</item>
-		<item name="android:layout_marginLeft">8dp</item>
+		<item name="android:textSize">18sp</item>
+	</style>
+	
+	<style name="Text.SliderName" parent="Text.SliderNameWithButton">
+		<item name="android:layout_marginLeft">11dp</item>
 	</style>
 	
 	<style name="Text.SliderSwitch">

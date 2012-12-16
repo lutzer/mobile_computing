@@ -27,7 +27,7 @@
                  android:layout_marginLeft="0dp"/>
              
              <TextView
-                 style="@style/Text.ButtonLabel"
+                 style="@style/Text.SliderNameWithButton"
                  android:text="Exposure" />
              
              <View style="@style/Spacer"/>
@@ -38,7 +38,7 @@
              
              <Button
                  android:id="@+id/ButtonExposureSelect"
-                 style="@style/Item.Button"
+                 style="@style/Item.ButtonNumberInput"
                  android:layout_marginRight="0dp"/>
             
    		 </LinearLayout>
@@ -95,12 +95,7 @@
     	android:layout_height="fill_parent"
     	android:orientation="vertical"
     	style="@style/View"
-    	android:gravity="center_horizontal|bottom">
-               
-        <TextView
-            style="@style/Text.TitleStripe"
-            android:text="TRIGGER" />
-        
+    	android:gravity="center_horizontal|bottom">    
         
         <Button style="@style/Item.ShutterButton" />
         

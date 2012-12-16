@@ -9,6 +9,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -44,6 +45,7 @@ public class SliderSwitch extends FrameLayout {
 	
 	ArrayList<OnSliderSwitchChangeListener> switchListeners = new ArrayList<OnSliderSwitchChangeListener>();
 	int currentSliderPosition = 0;
+	boolean newSliderPosition = false;
 
 	public SliderSwitch(Context context) {
 		super(context);
@@ -190,6 +192,7 @@ public class SliderSwitch extends FrameLayout {
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
 		
+		
 	}
 
 	@Override
@@ -204,10 +207,20 @@ public class SliderSwitch extends FrameLayout {
 	    sliderWidth = ((RelativeLayout) findViewById(R.id.relLayout)).getWidth();
 	    spaceBetweenElements = (sliderWidth-knobWidth)/(numberOfElements-1);
 	    
+	    
 	    /*for (int i=0;i<labels.size();i++) {
 	    	labels.get(i).setLayoutParams(new LinearLayout.LayoutParams(10,LayoutParams.WRAP_CONTENT,0.0F));
 	    }*/
 	    
+	    if (newSliderPosition&&spaceBetweenElements>0) {
+	    	knobPosition = spaceBetweenElements * currentSliderPosition;
+        	knobPosition = Utils.inRange(knobPosition, 0, sliderWidth-knobWidth);
+        	RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(sliderKnob.getWidth(),sliderKnob.getHeight());
+        	params.setMargins(knobPosition, 0, 0, 0);
+			sliderKnob.setLayoutParams(params);
+			newSliderPosition = false;
+			Log.e("INFO","knobPosition:"+knobPosition+ " currentPos:"+currentSliderPosition+ " spaceBetweenElements:"+spaceBetweenElements);
+	    }
 	}
 
 
@@ -236,11 +249,7 @@ public class SliderSwitch extends FrameLayout {
 	public void setSliderPosition(int position) {
 		if (position>-1 && position < numberOfElements) {
 			
-			/*knobPosition = spaceBetweenElements * position;
-        	knobPosition = Utils.inRange(knobPosition, 0, sliderWidth-knobWidth);
-        	RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(sliderKnob.getWidth(),sliderKnob.getHeight());
-        	params.setMargins(knobPosition, 0, 0, 0);
-			sliderKnob.setLayoutParams(params);*/
+			newSliderPosition = true;
 			currentSliderPosition = position;
 			
 			for (OnSliderSwitchChangeListener listener : switchListeners) 
@@ -250,6 +259,10 @@ public class SliderSwitch extends FrameLayout {
         	}
 			
 		}
+	}
+	
+	public int getSliderPosition() {
+		return currentSliderPosition;
 	}
 	
 	

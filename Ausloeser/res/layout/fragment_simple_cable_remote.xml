@@ -56,13 +56,15 @@
     	android:orientation="vertical"
     	style="@style/View"
     	android:gravity="center_horizontal|bottom">
-               
-        <TextView
-            style="@style/Text.TitleStripe"
-            android:text="TRIGGER" />
         
+        <Button 
+            android:id="@+id/triggerButton"
+            style="@style/Item.ShutterButton" />
         
-        <Button style="@style/Item.ShutterButton" />
+
+        <Button 
+            android:id="@+id/triggerButton"
+            style="@style/Item.ShutterButton" />
         
     </LinearLayout>
 
