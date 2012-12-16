@@ -22,6 +22,7 @@
             android:padding="0dp">
         	
              <ToggleButton
+                 android:id="@+id/ButtonExposure"
                  style="@style/Item.Checkbox"
                  android:layout_marginLeft="0dp"/>
              
@@ -36,14 +37,15 @@
                  android:text="35s"/>
              
              <Button
+                 android:id="@+id/ButtonExposureSelect"
                  style="@style/Item.Button"
                  android:layout_marginRight="0dp"/>
             
    		 </LinearLayout>
    		 
         <SeekBar
+            android:id="@+id/SliderExposure"
             style="@style/Item.Slider"
-            android:id="@+id/exposureSlider"
             android:max="20"
             android:progress="0"/>
         
