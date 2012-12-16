@@ -46,7 +46,7 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 		
 		//init camera controller
 		cameraControler = SingletonCameraController.INSTANCE;
-
+		cameraControler.setOnTimerUpdateListener(this);
 		
 		//get main layouts
 		controlLayout = view.findViewById(R.id.ControlsLayout); // holds sliders and buttons
@@ -173,10 +173,13 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 	public void onTimerExposureUpdate(long exposureLeft, long exposureTime) {
 		if (exposureLeft == 0) {
 			progressExposure.setProgress(progressExposure.getMax());
+			controlLayout.setVisibility(View.VISIBLE);
+			progressLayout.setVisibility(View.GONE);
 
 		}else{
 			int actProgress = (int) (exposureLeft * 100.0 / exposureTime);
 			progressExposure.setProgress(actProgress);
+			labelExposureProgress.setText(String.valueOf(exposureLeft/1000)+"s");
 		}
 
 	}
