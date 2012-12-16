@@ -1,8 +1,8 @@
 package com.ausloeser.screens;
 
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -23,33 +25,46 @@ import com.ausloeser.views.Utils;
  * @author Arnim Jepsen & Lutz Reiter
  *
  */
-public class SimpleCableRemoteFragment extends SherlockFragment implements OnClickListener{
+public class SimpleCableRemoteFragment extends SherlockFragment implements OnClickListener, OnSeekBarChangeListener{
+	
+	//range that is selectable by the slider
+	//TODO not used: public static final int MAX_EXPOSURE = 30;
+	//TODO not used: public static final int MIN_EXPOSURE = 1;
+	
+	private TextView textExposureTime;
+	private SeekBar sliderExposure;
+	private long exposureTime;
+	private static final String TAG = "SimpleCableRemoteFragment";
 
-	ToggleButton buttonExposure;
-	SeekBar sliderExposure;
-	
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_simple_cable_remote, container, false);
-	    
-		buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
+		
+		final ToggleButton buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
+		
 		sliderExposure = (SeekBar) view.findViewById(R.id.SliderExposure);
+		sliderExposure.setEnabled(false);
+		
 		final Button buttonExposureSelect = (Button) view.findViewById(R.id.ButtonExposureSelect);
 		final Button buttonTrigger = (Button) view.findViewById(R.id.triggerButton);
-
-		buttonTrigger.setOnClickListener(this);
+		textExposureTime = (TextView) view.findViewById(R.id.textExposureTime);
 		
+		
+		buttonExposureSelect.setOnClickListener(this);
+		buttonTrigger.setOnClickListener(this);
+		sliderExposure.setOnSeekBarChangeListener(this);
 		buttonExposure.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				sliderExposure.setEnabled(arg1);
+				if(!arg1){
+					sliderExposure.setProgress(0);
+				}
 				buttonExposureSelect.setEnabled(arg1);
 			}
 			
 		});
-		buttonExposure.toggle();
 		
 		// apply fonts
 		Utils.applyFonts(view.findViewById(R.id.mainLayout),Typeface.createFromAsset(getActivity().getAssets(),"fonts/eurostile.ttf"));
@@ -64,45 +79,34 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 		switch( v.getId() ){
 		
 		case R.id.triggerButton:
-			SingletonCameraController.INSTANCE.triggerSimple();
+			if(exposureTime == 0){
+				SingletonCameraController.INSTANCE.triggerSimple();
+			}else{
+				Log.d(TAG, Integer.toString(sliderExposure.getProgress()*1000));
+				SingletonCameraController.INSTANCE.triggerExposure(exposureTime);
+			}
 			break;
-		
 		}
+	}
+
+	@Override
+	public void onProgressChanged(SeekBar seekBar, int progress,
+			boolean fromUser) {
+		exposureTime = (long) progress*1000;
+		textExposureTime.setText(progress+"s");
+		
 		
 	}
-	
-	/**
-	 *  loads the shared preferences settings
-	 */
-	private void loadSettings() {
-		// read preferences
-		SharedPreferences prefs = getActivity().getSharedPreferences(
-				"com.ausloeser.app", getActivity().MODE_PRIVATE);
-		sliderExposure.setProgress(prefs.getInt("CableRemoteExposure", 0));
-		buttonExposure.setChecked(prefs.getBoolean("CoableRemoteExposureExposureChecked", false));
-	}
-	
-	
-	/**
-	 *  saves the shared preferences settings
-	 */
-	private void saveSettings() {
-		SharedPreferences prefs = getActivity().getSharedPreferences(
-				"com.ausloeser.app", getActivity().MODE_PRIVATE);
-		prefs.edit().putInt("CableRemoteExposure", sliderExposure.getProgress()).commit();
-		prefs.edit().putBoolean("CoableRemoteExposureExposureChecked", buttonExposure.isChecked()).commit();
 
-	}
-	
 	@Override
-	public void onPause() {
-		super.onPause();
-		saveSettings();
+	public void onStartTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
 	}
-	
+
 	@Override
-	public void onResume() {
-		super.onResume();
-		loadSettings();
+	public void onStopTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
 	}
 }
