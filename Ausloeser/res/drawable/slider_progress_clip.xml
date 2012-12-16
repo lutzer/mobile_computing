@@ -2,5 +2,5 @@
 <clip xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/slider_progress"
     android:clipOrientation="horizontal"
-    android:gravity="left">
+    android:gravity="left|center_vertical">
 </clip>
