@@ -24,7 +24,7 @@ public class SignalGenerationThread implements Runnable {
 			AudioFormat.ENCODING_PCM_16BIT, MIN_BUFFER_SIZE,
 			AudioTrack.MODE_STREAM);
 
-	private short samples[] = new short[1024];
+	private short samples[] = new short[16];
 	private boolean isFinished;
 
 
@@ -43,7 +43,6 @@ public class SignalGenerationThread implements Runnable {
 				samples[i] = Short.MAX_VALUE;
 			}
 			MY_TRACK.write(samples, 0, samples.length);
-			Log.d(TAG, "isMakingASound");
 		}
 
 	}

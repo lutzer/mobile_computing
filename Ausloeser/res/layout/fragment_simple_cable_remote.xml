@@ -4,24 +4,26 @@
     android:layout_height="match_parent"
     tools:context=".SimpleCableRemoteFragment" 
     style="@style/MainTheme"
-    android:orientation="vertical">
-    
+    android:orientation="vertical"
+    android:id="@+id/mainLayout">
+        
     <LinearLayout 
         android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:orientation="vertical"
-    	style="@style/View">
+    	style="@style/View"
+    	android:padding="0dp">
     	
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" 
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:padding="0dp">
         	
              <ToggleButton
                  style="@style/Item.Checkbox"
-                 android:layout_marginLeft="0dp"
-                 android:layout_marginBottom="0dp"/>
+                 android:layout_marginLeft="0dp"/>
              
              <TextView
                  style="@style/Text.ButtonLabel"
@@ -35,24 +37,30 @@
              
              <Button
                  style="@style/Item.Button"
-                 android:layout_marginRight="0dp"
-                 android:layout_marginBottom="0dp"/>
+                 android:layout_marginRight="0dp"/>
             
    		 </LinearLayout>
    		 
         <SeekBar
-            style="@style/Item"
+            style="@style/Item.Slider"
             android:id="@+id/exposureSlider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:max="20"
-            android:progress="0"
-            android:progressDrawable="@drawable/slider"
-            android:secondaryProgress="0"
-            android:thumb="@drawable/slider_knob" 
-            android:layout_marginTop="0dp"
-            android:paddingLeft="7dp"
-        	android:paddingRight="7dp"/>
+            android:progress="0"/>
+        
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="fill_parent"
+    	android:orientation="vertical"
+    	style="@style/View"
+    	android:gravity="center_horizontal|bottom">
+               
+        <TextView
+            style="@style/Text.TitleStripe"
+            android:text="TRIGGER" />
+        
+        
+        <Button style="@style/Item.ShutterButton" />
         
     </LinearLayout>
 
