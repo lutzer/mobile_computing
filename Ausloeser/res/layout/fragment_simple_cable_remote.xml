@@ -62,7 +62,9 @@
             android:text="TRIGGER" />
         
         
-        <Button style="@style/Item.ShutterButton" />
+        <Button 
+            android:id="@+id/triggerButton"
+            style="@style/Item.ShutterButton" />
         
     </LinearLayout>
 
