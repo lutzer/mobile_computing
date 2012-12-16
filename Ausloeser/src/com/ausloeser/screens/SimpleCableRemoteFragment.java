@@ -48,34 +48,26 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_simple_cable_remote, container, false);
 		
-		final ToggleButton buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
-		
 		sliderExposure = (SeekBar) view.findViewById(R.id.SliderExposure);
-
+		buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
 		labelExposure = (TextView) view.findViewById(R.id.LabelExposure);
 		progressExposure = (ProgressBar) view.findViewById(R.id.ProgressExposure);
 		labelExposureProgress = (TextView) view.findViewById(R.id.LabelExposureProgress);
+		
 		controlLayout = view.findViewById(R.id.ControlsLayout); // holds sliders and buttons
 		progressLayout = view.findViewById(R.id.ProgressLayout); // holds progress bars
-
-		sliderExposure.setEnabled(false);
 		
 		final Button buttonExposureSelect = (Button) view.findViewById(R.id.ButtonExposureSelect);
-		final Button buttonTrigger = (Button) view.findViewById(R.id.triggerButton);
 
 		//setup listeners	
-		
 		buttonExposureSelect.setOnClickListener(this);
-		buttonTrigger.setOnClickListener(this);
+		((Button) view.findViewById(R.id.triggerButton)).setOnClickListener(this);
 		sliderExposure.setOnSeekBarChangeListener(this);
 		buttonExposure.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				sliderExposure.setEnabled(arg1);
-				if(!arg1){
-					sliderExposure.setProgress(0);
-				}
 				buttonExposureSelect.setEnabled(arg1);
 			}
 			
@@ -164,5 +156,17 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 	public void onStopTrackingTouch(SeekBar arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		saveSettings();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		loadSettings();
 	}
 }
