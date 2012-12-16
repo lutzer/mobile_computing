@@ -3,6 +3,7 @@ package com.ausloeser.logic;
 import java.util.ArrayList;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 
 
 /**
@@ -15,18 +16,35 @@ public enum SingletonCameraController{
 	INSTANCE;
 	
 	private SignalGenerationThread signalGen;
-
+	private static final String TAG = "SingletonCameraController";
 	private CountDownTimer sendDelayCdTimer, sendExposureCdTimer;
+	
+	private boolean isRunning;
 	
 	//takes all registered listeners
 	ArrayList<OnDelayExposureTimerListener> listeners = new ArrayList<OnDelayExposureTimerListener>();
 
 	/**
 	 * Camera is just triggered once ()
+	 * 
 	 */
 			public void triggerSimple(){
+				if(isRunning){
+					triggerStop();
+				}
 				signalGen = new SignalGenerationThread();
 				new Thread(signalGen).start();
+				isRunning = true;
+				Log.d(TAG, "triggerSimpleCalled");
+				
+				//waits until some milliseconds of sound are generated
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 				triggerStop();
 			}
 			
@@ -34,31 +52,44 @@ public enum SingletonCameraController{
 			 * Camera is triggered unlimited
 			 */
 			public void triggerUnlimited(){
+				if(isRunning){
+					triggerStop();
+				}
 				signalGen = new SignalGenerationThread();
 				new Thread(signalGen).start();
+				isRunning = true;
 			}
 			
 			public void triggerExposure(long exposureTime){
+				if(isRunning){
+					triggerStop();
+				}
 				signalGen = new SignalGenerationThread();
 				generateExposure(exposureTime);
+				isRunning = true;
 			}
 			
 			public void triggerExposureDelay(long exposureTime, long delayTime){
+				if(isRunning){
+					triggerStop();
+				}
 				signalGen = new SignalGenerationThread();
 				generateDelay(exposureTime, delayTime);
+				isRunning = true;
 			}
 			
 			public void triggerStop(){
 				
 				if(signalGen!= null){
 					signalGen.stopSound();
+					isRunning = false;
 				}
 			}
 			
-	public void triggerTimeLapse(long exposureTime, long delayTime){
-		signalGen = new SignalGenerationThread();
-		generateDelay(exposureTime, delayTime);
-	}
+//	public void triggerTimeLapse(long exposureTime, long delayTime){
+//		signalGen = new SignalGenerationThread();
+//		generateDelay(exposureTime, delayTime);
+//	}
 	
 	
 	

@@ -91,7 +91,6 @@ public class MainActivity extends SherlockActivity {
 	        	startActivity(intent);
 			}
         });
-        listView.setSelector(R.drawable.abs__list_selector_holo_light);
         
     }
 

@@ -27,7 +27,6 @@ public class SignalGenerationThread implements Runnable {
 	private short samples[] = new short[16];
 	private boolean isFinished;
 
-
 	public void run(){
 			genSound();
 	};
@@ -37,21 +36,39 @@ public class SignalGenerationThread implements Runnable {
 	 * generates the sound with a frequency max supported by the chip (?)
 	 */
 	public void genSound() {
+		
 		MY_TRACK.play();
+		
+		//setFinished(false);
+		Log.d(TAG, "soundGen is started, isFinished value: "+isFinished);
 		while (!isFinished) {
+
+			
 			for (int i = 0; i < samples.length; i++) {
 				samples[i] = Short.MAX_VALUE;
 			}
+			
 			MY_TRACK.write(samples, 0, samples.length);
+			
 		}
 
 	}
+
+
+//	/**
+//	 * @param isFinished the isFinished to set
+//	 */
+//	private void setFinished(boolean isFinished) {
+//		this.isFinished = isFinished;
+//	}
+
 
 	/**
 	 * stops the sound-generation and flushes
 	 */
 	public void stopSound() {
 
+		//setFinished(true);
 		isFinished = true;
 
 		MY_TRACK.pause();
@@ -59,4 +76,6 @@ public class SignalGenerationThread implements Runnable {
 
 		Log.d(TAG, "soundGen is not running anymore");
 	}
+
+
 }

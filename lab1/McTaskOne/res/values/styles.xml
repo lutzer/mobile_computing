@@ -3,7 +3,7 @@
     <style name="Theme.Styled" parent="Theme.Sherlock.Light.DarkActionBar">
 	    <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
 	    <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
-	    <item name="android:textColor">#FFFFFF</item>
+	    <item name="android:textColor">@color/font_color</item>
 	</style>
 	
 	<style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
@@ -16,7 +16,7 @@
 	</style>
 	
 	<style name="MainTheme">
-	    <item name ="android:background">#000000</item>
+	    <item name ="android:background">@color/background_color</item>
 	</style>
 	<style name="Text">
 	    <item name = "android:padding">10dp</item>
