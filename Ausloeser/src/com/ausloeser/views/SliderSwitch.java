@@ -219,7 +219,7 @@ public class SliderSwitch extends FrameLayout {
         	params.setMargins(knobPosition, 0, 0, 0);
 			sliderKnob.setLayoutParams(params);
 			newSliderPosition = false;
-			Log.e("INFO","knobPosition:"+knobPosition+ " currentPos:"+currentSliderPosition+ " spaceBetweenElements:"+spaceBetweenElements);
+			//Log.e("INFO","knobPosition:"+knobPosition+ " currentPos:"+currentSliderPosition+ " spaceBetweenElements:"+spaceBetweenElements);
 	    }
 	}
 

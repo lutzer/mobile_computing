@@ -3,6 +3,8 @@ package com.ausloeser.screens;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,7 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -23,11 +29,14 @@ import com.ausloeser.views.Utils;
  * @author Arnim Jepsen & Lutz Reiter
  *
  */
-public class SimpleCableRemoteFragment extends SherlockFragment implements OnClickListener{
+public class SimpleCableRemoteFragment extends SherlockFragment implements OnClickListener,OnSeekBarChangeListener{
 
 	ToggleButton buttonExposure;
 	SeekBar sliderExposure;
+	ProgressBar progressExposure;
+	TextView labelExposure,labelExposureProgress;
 	
+	View controlLayout,progressLayout;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,11 +44,18 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 	    
 		buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
 		sliderExposure = (SeekBar) view.findViewById(R.id.SliderExposure);
+		labelExposure = (TextView) view.findViewById(R.id.LabelExposure);
+		progressExposure = (ProgressBar) view.findViewById(R.id.ProgressExposure);
+		labelExposureProgress = (TextView) view.findViewById(R.id.LabelExposureProgress);
+		controlLayout = view.findViewById(R.id.ControlsLayout); // holds sliders and buttons
+		progressLayout = view.findViewById(R.id.ProgressLayout); // holds progress bars
+		
 		final Button buttonExposureSelect = (Button) view.findViewById(R.id.ButtonExposureSelect);
 		final Button buttonTrigger = (Button) view.findViewById(R.id.triggerButton);
 
+		//setup listeners
 		buttonTrigger.setOnClickListener(this);
-		
+		sliderExposure.setOnSeekBarChangeListener(this);
 		buttonExposure.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -64,7 +80,26 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 		switch( v.getId() ){
 		
 		case R.id.triggerButton:
-			SingletonCameraController.INSTANCE.triggerSimple();
+			
+			controlLayout.setVisibility(View.GONE);
+			progressLayout.setVisibility(View.VISIBLE);
+			
+			final int exposureTime = sliderExposure.getProgress() * 1000;
+
+			CountDownTimer timer = new CountDownTimer(exposureTime, 100) {
+
+				public void onTick(long millisUntilFinished) {
+					updateProgressBars(millisUntilFinished, exposureTime);
+				}
+
+				public void onFinish() {
+					controlLayout.setVisibility(View.VISIBLE);
+					progressLayout.setVisibility(View.GONE);
+				}
+				
+			}.start();
+
+			//SingletonCameraController.INSTANCE.triggerSimple();
 			break;
 		
 		}
@@ -91,7 +126,11 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 				"com.ausloeser.app", getActivity().MODE_PRIVATE);
 		prefs.edit().putInt("CableRemoteExposure", sliderExposure.getProgress()).commit();
 		prefs.edit().putBoolean("CoableRemoteExposureExposureChecked", buttonExposure.isChecked()).commit();
-
+	}
+	
+	public void updateProgressBars(long millisUntilFinished, int exposureTime) {
+		progressExposure.setProgress((int)(millisUntilFinished*100.0/exposureTime));
+		labelExposureProgress.setText(millisUntilFinished/1000+" / "+exposureTime/1000+"s");
 	}
 	
 	@Override
@@ -104,5 +143,25 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 	public void onResume() {
 		super.onResume();
 		loadSettings();
+	}
+
+	@Override
+	public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+		switch( arg0.getId() ){
+		case R.id.SliderExposure:
+			labelExposure.setText(arg1+"s");
+		}
+	}
+
+	@Override
+	public void onStartTrackingTouch(SeekBar arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStopTrackingTouch(SeekBar arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
