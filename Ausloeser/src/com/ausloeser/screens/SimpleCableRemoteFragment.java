@@ -53,7 +53,7 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 		
 		//init camera controller
 		cameraControler = SingletonCameraController.INSTANCE;
-		
+		cameraControler.setOnTimerUpdateListener(this);
 		// get view vars
 		sliderExposure = (SeekBar) view.findViewById(R.id.SliderExposure);
 		buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
