@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Ausloeser</string>
+    <string name="app_name">Auslöser</string>
     <string name="menu_settings">Settings</string>
 
     <color name="box_background">#2C2C2C</color>
     <color name="selector_color">#CC0000</color>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_cable_remote">CableRemote</string>
     <string name="title_activity_simple_cable_remote_fragment">SimpleCableRemoteFragment</string>
 

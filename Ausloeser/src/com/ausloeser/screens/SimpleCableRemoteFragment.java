@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.ausloeser.logic.OnDelayExposureTimerListener;
 import com.ausloeser.logic.SingletonCameraController;
 import com.ausloeser.views.Utils;
 
@@ -30,7 +31,7 @@ import com.ausloeser.views.Utils;
  *
  */
 
-public class SimpleCableRemoteFragment extends SherlockFragment implements OnClickListener, OnSeekBarChangeListener{
+public class SimpleCableRemoteFragment extends SherlockFragment implements OnClickListener, OnSeekBarChangeListener, OnDelayExposureTimerListener{
 	
 	//range that is selectable by the slider
 	//TODO not used: public static final int MAX_EXPOSURE = 30;
@@ -59,6 +60,7 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 		labelExposure = (TextView) view.findViewById(R.id.LabelExposure);
 		progressExposure = (ProgressBar) view.findViewById(R.id.ProgressExposure);
 		labelExposureProgress = (TextView) view.findViewById(R.id.LabelExposureProgress);
+		
 		controlLayout = view.findViewById(R.id.ControlsLayout); // holds sliders and buttons
 		progressLayout = view.findViewById(R.id.ProgressLayout); // holds progress bars
 		
@@ -107,10 +109,13 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 					controlLayout.setVisibility(View.VISIBLE);
 					progressLayout.setVisibility(View.GONE);
 				}
-				
-			}.start();
 
-			//SingletonCameraController.INSTANCE.triggerSimple();
+			}.start();
+			if (exposureTime == 0) {
+				cameraControler.triggerSimple();
+			} else {
+				cameraControler.triggerExposure(exposureTime);
+			}
 			break;
 		}
 	}
@@ -172,5 +177,23 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 	public void onResume() {
 		super.onResume();
 		loadSettings();
+	}
+
+	@Override
+	public void onTimerExposureUpdate(long exposureLeft, long exposureTime) {
+		if (exposureLeft == 0) {
+			progressExposure.setProgress(progressExposure.getMax());
+
+		}else{
+		int actProgress = (int) (exposureLeft * 100 / exposureTime);
+		progressExposure.setProgress(actProgress);
+		}
+		
+	}
+
+	@Override
+	public void onTimerDelayUpdate(long delayLeft, long delayTime) {
+		// TODO Auto-generated method stub
+		
 	}
 }

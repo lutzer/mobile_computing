@@ -90,19 +90,19 @@ public class MainActivity extends SherlockActivity {
 	private void populateList() {
 		
 		ArrayList<Mode> modes = new ArrayList<Mode>();
-		modes.add(new Mode(	"Cable Remote",
-							"Lets you trigger your camera in simple, bulb or delayed mode.",
-							"img/modes/cable_select.png"));
-		modes.add(new Mode(	"Timelapse",
-							"Set your remote up for recording timelapses",
-							"img/modes/timelapse.png"));
-		modes.add(new Mode(	"Soundtrap",
-						"just at test mode",
-						"img/modes/clapping.png"));
-		modes.add(new Mode(	"Just Fire",
+		modes.add(new Mode(
+				"Cable Remote",
+				"Lets you trigger your camera in simple, bulb or delayed mode.",
+				"img/modes/cable_select.png"));
+		modes.add(new Mode("Timelapse",
+				"Set your remote up for recording timelapses",
+				"img/modes/timelapse.png"));
+		modes.add(new Mode("Soundtrap", "just at test mode",
+				"img/modes/clapping.png"));
+		modes.add(new Mode("Just Fire",
 				"Exposes as hast as your camera supports.",
 				"img/modes/cannon.png"));
-		modes.add(new Mode(	"Cameratrap",
+		modes.add(new Mode("Cameratrap",
 				"Triggers whenever someone walks into the frame",
 				"img/modes/siren.png"));
 
