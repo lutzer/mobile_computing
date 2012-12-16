@@ -71,14 +71,13 @@
              
              <TextView
                  style="@style/Text.SliderName"
-                 android:text="Exposure" 
-                 android:layout_height="48dp"/>
+                 android:text="Exposure"/>
              
              <View style="@style/Spacer"/>
              
              <TextView
                  android:id="@+id/LabelExposureProgress"
-                 style="@style/Text.SliderLabel"
+                 style="@style/Text.ProgressLabel"
                  android:text="35s"/>
              
    		 </LinearLayout>
