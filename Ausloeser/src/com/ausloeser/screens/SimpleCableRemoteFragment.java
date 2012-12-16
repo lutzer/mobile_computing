@@ -45,6 +45,7 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 			}
 			
 		});
+		buttonExposure.toggle();
 		
 		// apply fonts
 		Utils.applyFonts(view.findViewById(R.id.mainLayout),Typeface.createFromAsset(getActivity().getAssets(),"fonts/eurostile.ttf"));

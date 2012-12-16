@@ -27,7 +27,7 @@
                  android:layout_marginLeft="0dp"/>
              
              <TextView
-                 style="@style/Text.ButtonLabel"
+                 style="@style/Text.SliderNameWithButton"
                  android:text="Exposure" />
              
              <View style="@style/Spacer"/>
