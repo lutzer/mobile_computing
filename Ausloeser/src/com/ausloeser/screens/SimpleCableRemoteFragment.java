@@ -29,7 +29,13 @@ import com.ausloeser.views.Utils;
  * @author Arnim Jepsen & Lutz Reiter
  *
  */
-public class SimpleCableRemoteFragment extends SherlockFragment implements OnClickListener,OnSeekBarChangeListener{
+
+public class SimpleCableRemoteFragment extends SherlockFragment implements OnClickListener, OnSeekBarChangeListener{
+	
+	//range that is selectable by the slider
+	//TODO not used: public static final int MAX_EXPOSURE = 30;
+	//TODO not used: public static final int MIN_EXPOSURE = 1;
+	
 
 	ToggleButton buttonExposure;
 	SeekBar sliderExposure;
@@ -41,19 +47,25 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_simple_cable_remote, container, false);
-	    
-		buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
+		
+		final ToggleButton buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
+		
 		sliderExposure = (SeekBar) view.findViewById(R.id.SliderExposure);
+
 		labelExposure = (TextView) view.findViewById(R.id.LabelExposure);
 		progressExposure = (ProgressBar) view.findViewById(R.id.ProgressExposure);
 		labelExposureProgress = (TextView) view.findViewById(R.id.LabelExposureProgress);
 		controlLayout = view.findViewById(R.id.ControlsLayout); // holds sliders and buttons
 		progressLayout = view.findViewById(R.id.ProgressLayout); // holds progress bars
+
+		sliderExposure.setEnabled(false);
 		
 		final Button buttonExposureSelect = (Button) view.findViewById(R.id.ButtonExposureSelect);
 		final Button buttonTrigger = (Button) view.findViewById(R.id.triggerButton);
 
-		//setup listeners
+		//setup listeners	
+		
+		buttonExposureSelect.setOnClickListener(this);
 		buttonTrigger.setOnClickListener(this);
 		sliderExposure.setOnSeekBarChangeListener(this);
 		buttonExposure.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -61,6 +73,9 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 			@Override
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				sliderExposure.setEnabled(arg1);
+				if(!arg1){
+					sliderExposure.setProgress(0);
+				}
 				buttonExposureSelect.setEnabled(arg1);
 			}
 			
@@ -101,9 +116,7 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 
 			//SingletonCameraController.INSTANCE.triggerSimple();
 			break;
-		
 		}
-		
 	}
 	
 	/**
@@ -133,18 +146,6 @@ public class SimpleCableRemoteFragment extends SherlockFragment implements OnCli
 		labelExposureProgress.setText(millisUntilFinished/1000+" / "+exposureTime/1000+"s");
 	}
 	
-	@Override
-	public void onPause() {
-		super.onPause();
-		saveSettings();
-	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-		loadSettings();
-	}
-
 	@Override
 	public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
 		switch( arg0.getId() ){

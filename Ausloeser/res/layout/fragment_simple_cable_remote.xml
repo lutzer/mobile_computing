@@ -36,7 +36,8 @@
              <TextView
                  android:id="@+id/LabelExposure"
                  style="@style/Text.SliderLabel"
-                 android:text="35s"/>
+                 android:id="@+id/textExposureTime"
+                 android:text="0s"/>
              
              <Button
                  android:id="@+id/ButtonExposureSelect"

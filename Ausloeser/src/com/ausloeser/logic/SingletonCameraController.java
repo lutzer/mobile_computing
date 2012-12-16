@@ -84,6 +84,14 @@ public enum SingletonCameraController{
 					signalGen.stopSound();
 					isRunning = false;
 				}
+				
+				//stops timer if they exist
+				if(sendDelayCdTimer!=null){
+					sendDelayCdTimer.cancel();
+				}
+				if(sendExposureCdTimer!=null){
+					sendExposureCdTimer.cancel();
+				}
 			}
 			
 //	public void triggerTimeLapse(long exposureTime, long delayTime){
@@ -121,8 +129,9 @@ public enum SingletonCameraController{
 	 * @param exposureTime
 	 */
 	private void generateExposure(final long exposureTime){
-		
+		if(sendDelayCdTimer != null){
 		sendDelayCdTimer.cancel();
+		}
 		//Camera is triggered
 		triggerUnlimited();
 		
