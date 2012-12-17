@@ -3,24 +3,17 @@ package com.ausloeser.screens;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.ausloeser.logic.OnDelayExposureTimerListener;
 import com.ausloeser.logic.SingletonCameraController;
 import com.ausloeser.logic.Values;
 import com.ausloeser.views.Utils;
@@ -179,7 +172,7 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 		}else{
 			int actProgress = (int) (exposureLeft * 100.0 / exposureTime);
 			progressExposure.setProgress(actProgress);
-			labelExposureProgress.setText(String.valueOf(exposureLeft/1000)+"s");
+			labelExposureProgress.setText(String.valueOf(exposureLeft/1000.0)+"s");
 		}
 
 	}
