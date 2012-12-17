@@ -27,6 +27,8 @@ public abstract class AbstractCableRemoteFragment extends SherlockFragment imple
 	
 	View controlLayout,progressLayout;
 	
+	ToggleButton shutterButton;
+	
 	SingletonCameraController cameraControler;
 	
 	@Override
@@ -46,6 +48,9 @@ public abstract class AbstractCableRemoteFragment extends SherlockFragment imple
 	 */
 	protected abstract void saveSettings();
 	
+	protected abstract void startTriggerCamera();
+	
+	protected abstract void stopTriggerCamera();
 	
 	@Override
 	public abstract void onProgressChanged(SeekBar arg0, int arg1, boolean arg2);

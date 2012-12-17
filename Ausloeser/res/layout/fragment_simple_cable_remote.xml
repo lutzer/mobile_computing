@@ -95,8 +95,8 @@
     	style="@style/View"
     	android:gravity="center_horizontal|bottom">
         
-        <Button 
-            android:id="@+id/triggerButton"
+        <ToggleButton 
+            android:id="@+id/ButtonShutter"
             style="@style/Item.ShutterButton" />
         
     </LinearLayout>

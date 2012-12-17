@@ -44,6 +44,7 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 		//get main layouts
 		controlLayout = view.findViewById(R.id.ControlsLayout); // holds sliders and buttons
 		progressLayout = view.findViewById(R.id.ProgressLayout); // holds progress bars
+		shutterButton = (ToggleButton) view.findViewById(R.id.ButtonShutter);
 		// get view vars
 		sliderExposure = (SeekBar) view.findViewById(R.id.SliderExposure);
 		buttonExposure = (ToggleButton) view.findViewById(R.id.ButtonExposure);
@@ -54,7 +55,7 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 		//setup listeners
 		final Button buttonExposureSelect = (Button) view.findViewById(R.id.ButtonExposureSelect);
 		buttonExposureSelect.setOnClickListener(this);
-		((Button) view.findViewById(R.id.triggerButton)).setOnClickListener(this);
+		shutterButton.setOnClickListener(this);
 		sliderExposure.setOnSeekBarChangeListener(this);
 		buttonExposure.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -81,29 +82,12 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 		
 		switch( v.getId() ){
 		
-		case R.id.triggerButton:
+		case R.id.ButtonShutter:
 			
-			controlLayout.setVisibility(View.GONE);
-			progressLayout.setVisibility(View.VISIBLE);
-			
-			final int exposureTime = Values.getExposureTime(sliderExposure.getProgress());
-
-			/*CountDownTimer timer = new CountDownTimer(exposureTime, 100) {
-
-				public void onTick(long millisUntilFinished) {
-					updateProgressBars(millisUntilFinished, exposureTime);
-				}
-
-				public void onFinish() {
-					controlLayout.setVisibility(View.VISIBLE);
-					progressLayout.setVisibility(View.GONE);
-				}
-
-			}.start();*/
-			if (exposureTime == 0) {
-				cameraControler.triggerSimple();
+			if (shutterButton.isChecked()) {
+				this.startTriggerCamera();
 			} else {
-				cameraControler.triggerExposure(exposureTime);
+				this.stopTriggerCamera();
 			}
 			break;
 			
@@ -165,15 +149,35 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 	@Override
 	public void onTimerExposureUpdate(long exposureLeft, long exposureTime) {
 		if (exposureLeft == 0) {
-			progressExposure.setProgress(progressExposure.getMax());
-			controlLayout.setVisibility(View.VISIBLE);
-			progressLayout.setVisibility(View.GONE);
+			stopTriggerCamera();
 
 		}else{
-			int actProgress = (int) (exposureLeft * 100.0 / exposureTime);
+			int actProgress = (int) (exposureLeft * 100 / exposureTime);
 			progressExposure.setProgress(actProgress);
-			labelExposureProgress.setText(String.valueOf(exposureLeft/1000.0)+"s");
+			labelExposureProgress.setText(exposureLeft/1000+" / "+exposureTime/1000+"s");
 		}
 
+	}
+
+	@Override
+	protected void startTriggerCamera() {
+
+		if (!buttonExposure.isChecked()) {
+			cameraControler.triggerExposure(50);
+		} else {
+			controlLayout.setVisibility(View.GONE);
+			progressLayout.setVisibility(View.VISIBLE);
+			final int exposureTime = Values.getExposureTime(sliderExposure.getProgress());
+			cameraControler.triggerExposure(exposureTime);
+		}
+	}
+
+	@Override
+	protected void stopTriggerCamera() {
+		controlLayout.setVisibility(View.VISIBLE);
+		progressLayout.setVisibility(View.GONE);
+		shutterButton.setChecked(false);
+		cameraControler.triggerStop();
+		
 	}
 }
