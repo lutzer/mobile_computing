@@ -64,6 +64,11 @@ public enum SingletonCameraController{
 				if(isRunning){
 					triggerStop();
 				}
+				
+				if (delayTime <= 0) {
+					delayTime = 1;
+				}
+				
 				signalGen = new SignalGenerationThread();
 				generateDelay(exposureTime, delayTime);
 				isRunning = true;
@@ -154,6 +159,7 @@ public enum SingletonCameraController{
 	private void generateDelay(final long exposureTime, final long delayTime){
 		 //sends the exposureTime once to update the prob
 		sendTimerExposure(exposureTime, exposureTime);
+			
 		sendDelayCdTimer = new CountDownTimer(delayTime, 40) {
 
 		     public void onTick(long millisUntilFinished) {

@@ -50,7 +50,9 @@ public abstract class AbstractCableRemoteFragment extends SherlockFragment imple
 	protected abstract void stopTriggerCamera();
 	
 	@Override
-	public abstract void onProgressChanged(SeekBar arg0, int arg1, boolean arg2);
+	public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+		// TODO Auto-generated method stub
+	}
 
 	@Override
 	public void onStartTrackingTouch(SeekBar arg0) {
