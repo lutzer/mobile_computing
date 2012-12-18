@@ -94,7 +94,7 @@ public enum SingletonCameraController{
 				if(isRunning){
 					triggerStop();
 				}
-				long timelapseLength = amountPictures*intervalTime;
+				long timelapseLength = amountPictures*intervalTime+exposureTime;
 				//trigger initially before the first interval starts
 				//start the timelapse
 				generateTimelapse(timelapseLength, intervalTime, exposureTime);
@@ -137,7 +137,7 @@ public enum SingletonCameraController{
 	 * @param delayTime
 	 */  
 	private void generateDelay(final long exposureTime, final long delayTime){
-		 //sends the exposureTime once to update the progressBars accordingly
+		 //sends the exposureTime once to update the prob
 		sendTimerExposure(exposureTime, exposureTime);
 			
 		sendDelayCdTimer = new CountDownTimer(delayTime, 40) {

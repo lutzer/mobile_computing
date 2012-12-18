@@ -50,9 +50,7 @@ public abstract class AbstractCableRemoteFragment extends SherlockFragment imple
 	protected abstract void stopTriggerCamera();
 	
 	@Override
-	public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
-		
-	}
+	public abstract void onProgressChanged(SeekBar arg0, int arg1, boolean arg2);
 
 	@Override
 	public void onStartTrackingTouch(SeekBar arg0) {
@@ -70,7 +68,6 @@ public abstract class AbstractCableRemoteFragment extends SherlockFragment imple
 	public void onPause() {
 		super.onPause();
 		saveSettings();
-		//cameraControler.triggerStop();
 	}
 	
 	@Override
@@ -87,12 +84,6 @@ public abstract class AbstractCableRemoteFragment extends SherlockFragment imple
 
 	@Override
 	public void onTimerDelayUpdate(long delayLeft, long delayTime) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onTimerTimelapseUpdate(long timeLeft, int intervalsLeft) {
 		// TODO Auto-generated method stub
 		
 	}
