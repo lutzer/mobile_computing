@@ -29,23 +29,8 @@ public enum SingletonCameraController{
 	 * 
 	 */
 			public void triggerSimple(){
-//				if(isRunning){
-//					triggerStop();
-//				}
-//				signalGen = new SignalGenerationThread();
-//				new Thread(signalGen).start();
-//				isRunning = true;
-//				Log.d(TAG, "triggerSimpleCalled");
-//				
-//				//waits until some milliseconds of sound are generated
-//				try {
-//					Thread.sleep(50);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
 
-				triggerExposure(10);
+				triggerExposure(100);
 			}
 			
 			/**

@@ -1,14 +1,25 @@
 package com.ausloeser.screens;
 
+import android.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.ausloeser.dialogs.BaseDialogBuilder;
+import com.ausloeser.dialogs.NumberInputDialogBuilder;
 import com.ausloeser.logic.SingletonCameraController;
+import com.ausloeser.logic.Values;
 import com.ausloeser.views.Utils;
 
 /**
@@ -18,7 +29,7 @@ import com.ausloeser.views.Utils;
  *
  */
 
-public class BulbCableRemoteFragment extends AbstractCableRemoteFragment {
+public class HoldCableRemoteFragment extends AbstractCableRemoteFragment {
 	
 
 	TextView labelExposureProgress;
@@ -26,7 +37,7 @@ public class BulbCableRemoteFragment extends AbstractCableRemoteFragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_bulb_cable_remote, container, false);
+		View view = inflater.inflate(R.layout.fragment_hold_cable_remote, container, false);
 		
 		//init camera controller
 		cameraControler = SingletonCameraController.INSTANCE;
@@ -36,6 +47,19 @@ public class BulbCableRemoteFragment extends AbstractCableRemoteFragment {
 		controlLayout = view.findViewById(R.id.ControlsLayout); // holds sliders and buttons
 		progressLayout = view.findViewById(R.id.ProgressLayout); // holds progress bars
 		shutterButton = (ToggleButton) view.findViewById(R.id.ButtonShutter);
+		
+		shutterButton.setOnTouchListener(new Button.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View view, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN ) {
+					startTriggerCamera();
+                } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL ) {
+					stopTriggerCamera();
+                }
+				return false;
+			}
+		   });
 
 		labelExposureProgress = (TextView) view.findViewById(R.id.LabelExposureProgress);
 		
@@ -50,18 +74,15 @@ public class BulbCableRemoteFragment extends AbstractCableRemoteFragment {
 	
 	@Override
 	public void onClick(View v) {
-		
-		switch( v.getId() ){
+/*switch( v.getId() ){
 		
 		case R.id.ButtonShutter:
 			
-			if (shutterButton.isChecked()) {
-				this.startTriggerCamera();
-			} else {
+			if (!shutterButton.isPressed())
 				this.stopTriggerCamera();
-			}
+			
 			break;
-		}	
+		}	*/
 	}
 	
 	/**
