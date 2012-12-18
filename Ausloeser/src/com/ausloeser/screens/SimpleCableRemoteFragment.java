@@ -3,6 +3,7 @@ package com.ausloeser.screens;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,8 @@ import com.ausloeser.views.Utils;
 
 public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 	
-
+	final static String TAG ="SimpleCableRemoteFragment";
+	
 	ToggleButton buttonExposure;
 	SeekBar sliderExposure;
 	ProgressBar progressExposure;
@@ -158,7 +160,16 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 		}
 
 	}
+	
 
+	@Override
+	public void onTimerTimelapseUpdate(long timeLeft, int intervalsLeft) {
+		Log.d(TAG, "timeLeft: "+timeLeft);
+		Log.d(TAG, "intervalsLeft: "+intervalsLeft);
+		
+		
+	}
+	
 	@Override
 	protected void startTriggerCamera() {
 
@@ -168,7 +179,8 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 			controlLayout.setVisibility(View.GONE);
 			progressLayout.setVisibility(View.VISIBLE);
 			final int exposureTime = Values.getExposureTime(sliderExposure.getProgress());
-			cameraControler.triggerExposure(exposureTime);
+			//cameraControler.triggerExposure(exposureTime);
+			cameraControler.triggerTimeLapse(2000, 1000, 10);
 		}
 	}
 
@@ -180,4 +192,5 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 		cameraControler.triggerStop();
 		
 	}
+
 }

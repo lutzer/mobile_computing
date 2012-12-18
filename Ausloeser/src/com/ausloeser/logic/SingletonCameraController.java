@@ -17,7 +17,7 @@ public enum SingletonCameraController{
 	
 	private SignalGenerationThread signalGen;
 	private static final String TAG = "SingletonCameraController";
-	private CountDownTimer sendDelayCdTimer, sendExposureCdTimer;
+	private CountDownTimer sendDelayCdTimer, sendExposureCdTimer, timelapseTimer;
 	
 	private boolean isRunning;
 	
@@ -29,23 +29,23 @@ public enum SingletonCameraController{
 	 * 
 	 */
 			public void triggerSimple(){
-				if(isRunning){
-					triggerStop();
-				}
-				signalGen = new SignalGenerationThread();
-				new Thread(signalGen).start();
-				isRunning = true;
-				Log.d(TAG, "triggerSimpleCalled");
-				
-				//waits until some milliseconds of sound are generated
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				if(isRunning){
+//					triggerStop();
+//				}
+//				signalGen = new SignalGenerationThread();
+//				new Thread(signalGen).start();
+//				isRunning = true;
+//				Log.d(TAG, "triggerSimpleCalled");
+//				
+//				//waits until some milliseconds of sound are generated
+//				try {
+//					Thread.sleep(50);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 
-				triggerStop();
+				triggerExposure(10);
 			}
 			
 			/**
@@ -94,11 +94,50 @@ public enum SingletonCameraController{
 				}
 			}
 			
-//	public void triggerTimeLapse(long exposureTime, long delayTime){
-//		signalGen = new SignalGenerationThread();
-//		generateDelay(exposureTime, delayTime);
-//	}
+			/**
+			 * The calling class asks to generate a timelapse
+			 * @param intervalTime
+			 * @param exposureTime
+			 * @param amountPictures
+			 */
+			public void triggerTimeLapse(long intervalTime, long exposureTime, int amountPictures){
+				if(isRunning){
+					triggerStop();
+				}
+				long timelapseLength = amountPictures*intervalTime;
+				//trigger initially before the first interval starts
+				//start the timelapse
+				generateTimelapse(timelapseLength, intervalTime, exposureTime);
+			}
 	
+	/**
+	 * Takes the parameters to generate the Timelapse.
+	 * @param timelapseLength
+	 * @param intervalTime
+	 * @param exposureTime
+	 */
+	private void generateTimelapse (final long timelapseLength, final long intervalTime, final long exposureTime){
+		timelapseTimer= new CountDownTimer(timelapseLength, intervalTime){
+			int intervalsLeft = (int) (timelapseLength/intervalTime);
+			long millisUntilIntervalFinished;
+			@Override
+			public void onTick(long millisUntilFinished) {
+				intervalsLeft--;
+				//millisUntilIntervalFinished = millisUntilIntervalFinished-millisUntilIntervalFinished
+				Log.d(TAG, "Timelapse increment triggered"+  intervalsLeft);
+				generateExposure(exposureTime);
+				sendTimerTimelapse(millisUntilFinished, intervalsLeft);
+			}
+			
+			@Override
+			public void onFinish() {
+				Log.d(TAG, "Timelapse finished");
+				sendTimerTimelapse(0, 0);
+				
+			}
+			
+		}.start();
+	}
 	
 	
 	/**
@@ -106,9 +145,10 @@ public enum SingletonCameraController{
 	 * 
 	 * @param exposureTime
 	 * @param delayTime
-	 */  void generateDelay(final long exposureTime, final long delayTime){
-		//makes it send every 40 milliseconds (ca 35 frames/sec on the statusbar)
-		 
+	 */  
+	private void generateDelay(final long exposureTime, final long delayTime){
+		 //sends the exposureTime once to update the progressBars accordingly
+		sendTimerExposure(exposureTime, exposureTime);
 		sendDelayCdTimer = new CountDownTimer(delayTime, 40) {
 
 		     public void onTick(long millisUntilFinished) {
@@ -152,7 +192,7 @@ public enum SingletonCameraController{
 	}
 	
 	
-	
+	//add subscribed listeners
 	public void setOnTimerUpdateListener(OnDelayExposureTimerListener listener){
 		this.listeners.add(listener);
 	}
@@ -178,4 +218,12 @@ public enum SingletonCameraController{
 			listener.onTimerDelayUpdate(delayLeft, delayTime);
 		}
 	}
+	
+	public void sendTimerTimelapse(long timeLeft, int intervalsLeft){
+		for(OnDelayExposureTimerListener listener:listeners){
+			listener.onTimerTimelapseUpdate(timeLeft, intervalsLeft);
+		}
+	}
 }
+
+//TODO dftl cancel every timer
