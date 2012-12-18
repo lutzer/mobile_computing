@@ -86,6 +86,13 @@
 		<item name="android:textOff"></item>
 	</style>
 	
+	<style name="Item.ShutterButtonHold">
+	    <item name="android:layout_width">120dp</item>
+	    <item name="android:layout_height">120dp</item>
+	    <item name="android:background">@drawable/button_shutter_hold</item>
+	    <item name="android:text"></item>>
+	</style>
+	
 	<style name="Item.Slider">
 	    <item name="android:layout_width">match_parent</item>
 	    <item name="android:layout_height">wrap_content</item>
@@ -146,11 +153,10 @@
 	
 	<style name="Text.ProgressLabel" parent="Text.SliderLabel">
 	    <item name="android:layout_marginRight">11dp</item>
-	    <item name="android:layout_height">48dp</item>
 	</style>
 	
 	<style name="Text.SliderNameWithButton">
-	    <item name="android:layout_height">match_parent</item>
+	    <item name="android:layout_height">48dp</item>
 	    <item name="android:layout_width">wrap_content</item>
 	    <item name="android:gravity">center</item>
 		<item name="android:textSize">18sp</item>
@@ -158,6 +164,11 @@
 	
 	<style name="Text.SliderName" parent="Text.SliderNameWithButton">
 		<item name="android:layout_marginLeft">11dp</item>
+	</style>
+	
+	<style name="Text.ModeDescription" parent="Text.SliderName">
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:gravity">center</item>
 	</style>
 	
 	<style name="Text.SliderSwitch">

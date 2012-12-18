@@ -30,7 +30,7 @@ public enum SingletonCameraController{
 	 */
 			public void triggerSimple(){
 
-				triggerExposure(10);
+				triggerExposure(100);
 			}
 			
 			/**

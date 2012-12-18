@@ -1,8 +1,6 @@
 package com.ausloeser.screens;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -11,7 +9,6 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.widget.TextView;
 
 import com.ausloeser.views.SliderSwitch;
 import com.ausloeser.views.Utils;
@@ -47,8 +44,14 @@ public class CableRemoteActivity extends SherlockFragmentActivity {
 				case 1:
 					fragment = new DelayCableRemoteFragment();
 					break;
+				case 2:
+					fragment = new BulbCableRemoteFragment();
+					break;
+				case 3:
+					fragment = new HoldCableRemoteFragment();
+					break;
 				default:
-					//fragment = new SherlockFragment();		
+					fragment = new SherlockFragment();		
 					return;
 				}
 				if (fragment != null)
@@ -121,7 +124,6 @@ public class CableRemoteActivity extends SherlockFragmentActivity {
 		SharedPreferences prefs = getSharedPreferences(
 				"com.ausloeser.app", this.MODE_PRIVATE);
 		prefs.edit().putInt("CableRemoteMode", sliderSwitch.getSliderPosition()).commit();
-		
 	}
 
 }

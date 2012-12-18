@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:id="@+id/mainLayout">
         
-    <LinearLayout 
+   <LinearLayout 
         android:id="@+id/ControlsLayout"
         android:layout_width="match_parent"
     	android:layout_height="wrap_content"
@@ -17,11 +17,7 @@
     	
     	<TextView
             style="@style/Text.ModeDescription"
-            android:text="Press button once to start the exposure." />
-
-        <TextView
-            style="@style/Text.ModeDescription"
-            android:text="Press again to stop it." />
+            android:text="Press and hold button for setting the exposure time." />
         
     </LinearLayout>
     
@@ -65,7 +61,7 @@
         
         <ToggleButton 
             android:id="@+id/ButtonShutter"
-            style="@style/Item.ShutterButton" />
+            style="@style/Item.ShutterButtonHold" />
         
     </LinearLayout>
 
