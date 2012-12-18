@@ -8,13 +8,14 @@
     android:id="@+id/mainLayout">
         
     <LinearLayout 
+        android:id="@+id/ControlsLayout"
         android:layout_width="match_parent"
     	android:layout_height="wrap_content"
     	android:orientation="vertical"
     	style="@style/View"
     	android:padding="0dp">
     	
-        <LinearLayout
+       <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" 
@@ -33,8 +34,9 @@
              <View style="@style/Spacer"/>
              
              <TextView
+                 android:id="@+id/LabelExposure"
                  style="@style/Text.SliderLabel"
-                 android:text="35s"/>
+                 android:text="0s"/>
              
              <Button
                  android:id="@+id/ButtonExposureSelect"
@@ -48,15 +50,6 @@
             style="@style/Item.Slider"
             android:max="20"
             android:progress="0"/>
-        
-    </LinearLayout>
-    
-    <LinearLayout 
-        android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="vertical"
-    	style="@style/View"
-    	android:padding="0dp">
     	
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,6 +65,7 @@
              <View style="@style/Spacer"/>
              
              <TextView
+                 android:id="@+id/LabelDelay" 
                  style="@style/Text.SliderLabel"
                  android:text="35s"/>
              
@@ -85,8 +79,67 @@
         <SeekBar
             android:id="@+id/SliderDelay"
             style="@style/Item.Slider"
-            android:max="20"
+            android:max="60"
             android:progress="0"/>
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/ProgressLayout"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical"
+    	style="@style/View"
+    	android:padding="0dp"
+    	android:visibility="gone">
+                    	
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:gravity="center_vertical"
+            android:padding="0dp">
+             
+             <TextView
+                 style="@style/Text.SliderName"
+                 android:text="Exposure"/>
+             
+             <View style="@style/Spacer"/>
+             
+             <TextView
+                 android:id="@+id/LabelExposureProgress"
+                 style="@style/Text.ProgressLabel"
+                 android:text="35s"/>
+             
+   		 </LinearLayout>
+   		 
+        <ProgressBar
+            android:id="@+id/ProgressExposure"
+            style="@style/Item.ProgressBar"/>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:gravity="center_vertical"
+            android:padding="0dp">
+             
+             <TextView
+                 style="@style/Text.SliderName"
+                 android:text="Delay"/>
+             
+             <View style="@style/Spacer"/>
+             
+             <TextView
+                 android:id="@+id/LabelDelayProgress"
+                 style="@style/Text.ProgressLabel"
+                 android:text="35s"/>
+             
+   		 </LinearLayout>
+   		 
+        <ProgressBar
+            android:id="@+id/ProgressDelay"
+            style="@style/Item.ProgressBar"/>
         
     </LinearLayout>
     
@@ -95,12 +148,13 @@
     	android:layout_height="fill_parent"
     	android:orientation="vertical"
     	style="@style/View"
-    	android:gravity="center_horizontal|bottom">    
+    	android:gravity="center_horizontal|bottom">
         
-        <Button style="@style/Item.ShutterButton" />
+        <ToggleButton 
+            android:id="@+id/ButtonShutter"
+            style="@style/Item.ShutterButton" />
         
-    </LinearLayout>
-
+    </LinearLayout>    
     
 
 </LinearLayout>
