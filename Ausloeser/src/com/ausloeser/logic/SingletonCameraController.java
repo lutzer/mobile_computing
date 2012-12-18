@@ -29,21 +29,6 @@ public enum SingletonCameraController{
 	 * 
 	 */
 			public void triggerSimple(){
-//				if(isRunning){
-//					triggerStop();
-//				}
-//				signalGen = new SignalGenerationThread();
-//				new Thread(signalGen).start();
-//				isRunning = true;
-//				Log.d(TAG, "triggerSimpleCalled");
-//				
-//				//waits until some milliseconds of sound are generated
-//				try {
-//					Thread.sleep(50);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
 
 				triggerExposure(10);
 			}
@@ -147,7 +132,7 @@ public enum SingletonCameraController{
 	 * @param delayTime
 	 */  
 	private void generateDelay(final long exposureTime, final long delayTime){
-		 //sends the exposureTime once to update the progressBars accordingly
+		 //sends the exposureTime once to update the prob
 		sendTimerExposure(exposureTime, exposureTime);
 		sendDelayCdTimer = new CountDownTimer(delayTime, 40) {
 
