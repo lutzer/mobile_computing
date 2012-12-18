@@ -3,7 +3,6 @@ package com.ausloeser.logic;
 import java.util.ArrayList;
 
 import android.os.CountDownTimer;
-import android.util.Log;
 
 
 /**
@@ -116,9 +115,7 @@ public enum SingletonCameraController{
 				if(isRunning){
 					triggerStop();
 				}
-					for(int i=0; i<amountPictures; i++){
-						generateTimelapse(intervalTime, exposureTime, i);
-					}
+				//long totalTimelapseTime = intervalTim
 			}
 			
 			public void stopTimelapse(){
@@ -132,21 +129,21 @@ public enum SingletonCameraController{
 	 * @param exposureTime
 	 */
 	private void generateTimelapse (long intervalTime, final long exposureTime, int amountPictures){
-		timelapseTimer= new CountDownTimer(intervalTime, 40){
-			@Override
-			public void onTick(long millisUntilFinished) {
-			}
-			
-			@Override
-			public void onFinish() {
-				Log.d(TAG, "Timelapse finished");
-				generateExposure(exposureTime);
-				sendTimerTimelapse(millisUntilFinished, intervalsLeft);
-				sendTimerTimelapse(0, 0);
-				
-			}
-			
-		}.start();
+//		timelapseTimer= new CountDownTimer(intervalTime, 40){
+//			@Override
+//			public void onTick(long millisUntilFinished) {
+//			}
+//			
+//			@Override
+//			public void onFinish() {
+//				Log.d(TAG, "Timelapse finished");
+//				generateExposure(exposureTime);
+//				sendTimerTimelapse(millisUntilFinished, intervalsLeft);
+//				sendTimerTimelapse(0, 0);
+//				
+//			}
+//			
+//		}.start();
 	}
 	
 	
