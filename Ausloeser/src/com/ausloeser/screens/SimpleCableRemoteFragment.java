@@ -1,5 +1,6 @@
 package com.ausloeser.screens;
 
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.ausloeser.dialogs.BaseDialogBuilder;
+import com.ausloeser.dialogs.NumberInputDialogBuilder;
 import com.ausloeser.logic.SingletonCameraController;
 import com.ausloeser.logic.Values;
 import com.ausloeser.views.Utils;
@@ -32,6 +35,7 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 	SeekBar sliderExposure;
 	ProgressBar progressExposure;
 	TextView labelExposure,labelExposureProgress;
+	int exposureTime;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				sliderExposure.setEnabled(arg1);
 				buttonExposureSelect.setEnabled(arg1);
+				setExposure(exposureTime);
 			}
 			
 		});
@@ -91,9 +96,26 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 			}
 			break;
 			
-//		case R.id.ButtonExposure:
-//			
-//			break;
+		case R.id.ButtonExposureSelect:
+			// create a dialog for picking the exposure
+			final NumberInputDialogBuilder builder = new NumberInputDialogBuilder(getActivity(),"Set Exposure Time (s)",
+					exposureTime/1000.0F,0.0F,99999.9F);
+			
+			builder.SetDialogResultListener(new BaseDialogBuilder.OnDialogResultListener() {
+
+				@Override
+				public void OnDialogResultListener(boolean result) {
+					if (result) {
+						if (builder.getValue() > 0)
+						sliderExposure.setProgress(0);
+						setExposure((int) (builder.getValue()*1000.0F));
+					}
+				}
+
+			});
+			AlertDialog dialog = builder.create();
+			dialog.show();
+		break;
 		}
 	}
 	
@@ -107,6 +129,8 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 				"com.ausloeser.app", getActivity().MODE_PRIVATE);
 		sliderExposure.setProgress(prefs.getInt("CableRemoteExposure", 0));
 		buttonExposure.setChecked(prefs.getBoolean("CoableRemoteExposureExposureChecked", false));
+		exposureTime = prefs.getInt("CableRemoteExposureTime", Values.getExposureTime(0));
+		setExposure(exposureTime);
 	}
 	
 	
@@ -118,32 +142,16 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 		SharedPreferences prefs = getActivity().getSharedPreferences(
 				"com.ausloeser.app", getActivity().MODE_PRIVATE);
 		prefs.edit().putInt("CableRemoteExposure", sliderExposure.getProgress()).commit();
+		prefs.edit().putInt("CableRemoteExposureTime", exposureTime).commit();
 		prefs.edit().putBoolean("CoableRemoteExposureExposureChecked", buttonExposure.isChecked()).commit();
 	}
-	/*
-	public void updateProgressBars(long millisUntilFinished, int exposureTime) {
-		progressExposure.setProgress((int)(millisUntilFinished*100.0/exposureTime));
-		labelExposureProgress.setText(millisUntilFinished/1000+" / "+exposureTime/1000+"s");
-	}*/
-	
+
 	@Override
 	public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
 		switch( arg0.getId() ){
 		case R.id.SliderExposure:
-			labelExposure.setText(Values.getExposureTime(arg1)/1000.0+"s");
+			setExposure(Values.getExposureTime(arg1));
 		}
-	}
-	
-	@Override
-	public void onPause() {
-		super.onPause();
-		saveSettings();
-	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-		loadSettings();
 	}
 
 	@Override
@@ -163,11 +171,10 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 	protected void startTriggerCamera() {
 
 		if (!buttonExposure.isChecked()) {
-			cameraControler.triggerExposure(50);
+			cameraControler.triggerSimple();
 		} else {
 			controlLayout.setVisibility(View.GONE);
 			progressLayout.setVisibility(View.VISIBLE);
-			final int exposureTime = Values.getExposureTime(sliderExposure.getProgress());
 			cameraControler.triggerExposure(exposureTime);
 		}
 	}
@@ -179,5 +186,14 @@ public class SimpleCableRemoteFragment extends AbstractCableRemoteFragment {
 		shutterButton.setChecked(false);
 		cameraControler.triggerStop();
 		
+	}
+	
+	private void setExposure(int value) {
+		exposureTime = value;
+		if (buttonExposure.isChecked())
+			labelExposure.setText((value/1000.0F)+"s");
+		else
+			labelExposure.setText("Cam");
+			
 	}
 }
