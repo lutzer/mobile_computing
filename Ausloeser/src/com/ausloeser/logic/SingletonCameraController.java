@@ -54,6 +54,12 @@ public enum SingletonCameraController{
 				isRunning = true;
 			}
 			
+			/**
+			 * Trigger with exposure and delay in milliseconds
+			 * 
+			 * @param exposureTime
+			 * @param delayTime
+			 */
 			public void triggerExposureDelay(long exposureTime, long delayTime){
 				if(isRunning){
 					triggerStop();
@@ -63,6 +69,9 @@ public enum SingletonCameraController{
 				isRunning = true;
 			}
 			
+			/**
+			 * stops the triggering of the Sound
+			 */
 			public void triggerStop(){
 				
 				if(signalGen!= null){
@@ -70,14 +79,27 @@ public enum SingletonCameraController{
 					isRunning = false;
 				}
 				
-				//stops timer if they exist
+				cancelAllTimers();
+			}
+			
+			
+			
+			/**
+			 * Prevents unused Threads hanging around and stops/cancels Countdown timers
+			 */
+			private void cancelAllTimers(){
 				if(sendDelayCdTimer!=null){
 					sendDelayCdTimer.cancel();
 				}
 				if(sendExposureCdTimer!=null){
 					sendExposureCdTimer.cancel();
 				}
+				if(timelapseTimer!=null){
+					timelapseTimer.cancel();
+				}
 			}
+			
+			
 			
 			/**
 			 * The calling class asks to generate a timelapse
@@ -85,14 +107,17 @@ public enum SingletonCameraController{
 			 * @param exposureTime
 			 * @param amountPictures
 			 */
-			public void triggerTimeLapse(long intervalTime, long exposureTime, int amountPictures){
+			public void triggerTimelapse(long intervalTime, long exposureTime, int amountPictures){
 				if(isRunning){
 					triggerStop();
 				}
-				long timelapseLength = amountPictures*intervalTime+exposureTime;
-				//trigger initially before the first interval starts
-				//start the timelapse
-				generateTimelapse(timelapseLength, intervalTime, exposureTime);
+					for(int i=0; i<amountPictures; i++){
+						generateTimelapse(intervalTime, exposureTime, i);
+					}
+			}
+			
+			public void stopTimelapse(){
+				cancelAllTimers();
 			}
 	
 	/**
@@ -101,22 +126,17 @@ public enum SingletonCameraController{
 	 * @param intervalTime
 	 * @param exposureTime
 	 */
-	private void generateTimelapse (final long timelapseLength, final long intervalTime, final long exposureTime){
-		timelapseTimer= new CountDownTimer(timelapseLength, intervalTime){
-			int intervalsLeft = (int) (timelapseLength/intervalTime);
-			long millisUntilIntervalFinished;
+	private void generateTimelapse (long intervalTime, final long exposureTime, int amountPictures){
+		timelapseTimer= new CountDownTimer(intervalTime, 40){
 			@Override
 			public void onTick(long millisUntilFinished) {
-				intervalsLeft--;
-				//millisUntilIntervalFinished = millisUntilIntervalFinished-millisUntilIntervalFinished
-				Log.d(TAG, "Timelapse increment triggered"+  intervalsLeft);
-				generateExposure(exposureTime);
-				sendTimerTimelapse(millisUntilFinished, intervalsLeft);
 			}
 			
 			@Override
 			public void onFinish() {
 				Log.d(TAG, "Timelapse finished");
+				generateExposure(exposureTime);
+				sendTimerTimelapse(millisUntilFinished, intervalsLeft);
 				sendTimerTimelapse(0, 0);
 				
 			}
@@ -210,5 +230,3 @@ public enum SingletonCameraController{
 		}
 	}
 }
-
-//TODO dftl cancel every timer
