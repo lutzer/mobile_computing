@@ -87,4 +87,10 @@ public abstract class AbstractCableRemoteFragment extends SherlockFragment imple
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onTimerTimelapseUpdate(long timeLeft, int intervalsLeft) {
+		// TODO Auto-generated method stub
+		
+	}
 }
