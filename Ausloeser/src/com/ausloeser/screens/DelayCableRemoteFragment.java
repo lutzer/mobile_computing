@@ -133,7 +133,7 @@ public class DelayCableRemoteFragment extends AbstractCableRemoteFragment {
 		
 		case R.id.ButtonDelaySelect:
 			// create a dialog for picking the exposure
-			final NumberInputDialogBuilder builder2 = new NumberInputDialogBuilder(getActivity(),"Set Exposure Time (s)",
+			final NumberInputDialogBuilder builder2 = new NumberInputDialogBuilder(getActivity(),"Set Delay Time (s)",
 					exposureTime/1000.0F,0.0F,99999.9F);
 			
 			builder2.SetDialogResultListener(new BaseDialogBuilder.OnDialogResultListener() {

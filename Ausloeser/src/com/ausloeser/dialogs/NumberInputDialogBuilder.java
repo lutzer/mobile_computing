@@ -3,6 +3,7 @@ package com.ausloeser.dialogs;
 import com.ausloeser.screens.R;
 
 import android.content.Context;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -26,6 +27,19 @@ public class NumberInputDialogBuilder extends BaseDialogBuilder {
 		super(arg0, title, Buttons.OkCancel);
 		
 		init(arg0);
+		
+		numberInput.setText(String.valueOf(value));
+		this.minValue = minValue;
+		this.maxValue = maxValue;
+		
+	}
+	
+	public NumberInputDialogBuilder(Context arg0, String title, int value, int minValue, int maxValue) {
+		super(arg0, title, Buttons.OkCancel);
+		
+		init(arg0);
+		
+		numberInput.setInputType(InputType.TYPE_CLASS_NUMBER);
 		
 		numberInput.setText(String.valueOf(value));
 		this.minValue = minValue;

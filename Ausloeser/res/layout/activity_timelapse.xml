@@ -1,15 +1,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:custom="http://schemas.android.com/apk/res/com.ausloeser.screens"
     style="@style/MainTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".CableRemoteActivity" >
+    tools:context=".TimelapseActivity" 
+    android:id="@+id/mainLayout">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -31,137 +30,221 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/title_stripe" />
+            
         </LinearLayout>
         
-            
-                    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" 
-            android:gravity="center_vertical"
-            android:padding="0dp">
-             
-             <TextView
-                 style="@style/Text.SliderName"
-                 android:text="Interval" />
-             
-             <View style="@style/Spacer"/>
-             
-             <TextView
-                 android:id="@+id/LabelExposure"
-                 style="@style/Text.SliderLabel"
-                 android:text="0s"/>
-             
-             <Button
-                 android:id="@+id/ButtonExposureSelect"
-                 style="@style/Item.ButtonNumberInput"
-                 android:layout_marginRight="0dp"/>
-            
-   		 </LinearLayout>
-   		 
-        <SeekBar
-            android:id="@+id/SliderExposure"
-            style="@style/Item.Slider"
-            android:max="20"/>
-        
-        <!-- Separator -->
-            <ImageView
-                style="@style/Separator"
-                />
-        
-        
-        <!--Amount of Pictures Selection Area -->
-            
-                                <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" 
-            android:gravity="center_vertical"
-            android:padding="0dp">
-
-             <TextView
-                 style="@style/Text.SliderName"
-                 android:text="Amount of Pictures" />
-             
-             <View style="@style/Spacer"/>
-             
-             <TextView
-                 android:id="@+id/LabelExposure"
-                 style="@style/Text.SliderLabel"
-                 android:text="0"/>
-             
-             <Button
-                 android:id="@+id/ButtonExposureSelect"
-                 style="@style/Item.ButtonNumberInput"
-                 android:layout_marginRight="0dp"/>
-            
-   		 </LinearLayout>
-   		 
-        <SeekBar
-            android:id="@+id/SliderExposure"
-            style="@style/Item.Slider"
-            android:max="20"/>
-            
-        <!-- seperator -->
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/title_stripe" />
-        
-                 <!-- Exposure Selection Area -->
-         
-                             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" 
-            android:gravity="center_vertical"
-            android:padding="0dp">
-        	
-             <ToggleButton
-                 android:id="@+id/ButtonExposure"
-                 style="@style/Item.Checkbox"
-                 android:layout_marginLeft="0dp"/>
-             
-             <TextView
-                 style="@style/Text.SliderNameWithButton"
-                 android:text="Exposure Time" />
-             
-             <View style="@style/Spacer"/>
-             
-             <TextView
-                 android:id="@+id/LabelExposure"
-                 style="@style/Text.SliderLabel"
-                 android:text="0s"/>
-             
-             <Button
-                 android:id="@+id/ButtonExposureSelect"
-                 style="@style/Item.ButtonNumberInput"
-                 android:layout_marginRight="0dp"/>
-            
-   		 </LinearLayout>
-   		 
-        <SeekBar
-            android:id="@+id/SliderExposure"
-            style="@style/Item.Slider"
-            android:max="20"/>
-            
-            
-            
+        <LinearLayout 
+	        android:id="@+id/ControlsLayout"
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="vertical"
+	    	style="@style/View"
+	    	android:padding="0dp">
+    	
+	       <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" 
+	            android:gravity="center_vertical"
+	            android:padding="0dp">
+	        	
+	             <ToggleButton
+	                 android:id="@+id/ButtonExposure"
+	                 style="@style/Item.Checkbox"
+	                 android:layout_marginLeft="0dp"/>
+	             
+	             <TextView
+	                 style="@style/Text.SliderNameWithButton"
+	                 android:text="Exposure" />
+	             
+	             <View style="@style/Spacer"/>
+	             
+	             <TextView
+	                 android:id="@+id/LabelExposure"
+	                 style="@style/Text.SliderLabel"
+	                 android:text="0s"/>
+	             
+	             <Button
+	                 android:id="@+id/ButtonExposureSelect"
+	                 style="@style/Item.ButtonNumberInput"
+	                 android:layout_marginRight="0dp"/>
+	            
+	   		 </LinearLayout>
+	   		 
+	        <SeekBar
+	            android:id="@+id/SliderExposure"
+	            style="@style/Item.Slider"
+	            android:max="20"
+	            android:progress="0"/>
+	        
+	        <ImageView
+                style="@style/Seperator" />
+	    	
+	        <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" 
+	            android:gravity="center_vertical"
+	            android:padding="0dp">
+	        	
+	             <TextView
+	                 style="@style/Text.SliderName"
+	                 android:text="Intervall" />
+	             
+	             <View style="@style/Spacer"/>
+	             
+	             <TextView
+	                 android:id="@+id/LabelIntervall" 
+	                 style="@style/Text.SliderLabel"
+	                 android:text="35s"/>
+	             
+	             <Button
+	                 android:id="@+id/ButtonIntervallSelect"
+	                 style="@style/Item.ButtonNumberInput"
+	                 android:layout_marginRight="0dp"/>
+	            
+	   		 </LinearLayout>
+	   		 
+	        <SeekBar
+	            android:id="@+id/SliderIntervall"
+	            style="@style/Item.Slider"
+	            android:max="60"
+	            android:progress="0"/>
+	        
+	        <ImageView
+                style="@style/Seperator" />
+	        
+	        <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" 
+	            android:gravity="center_vertical"
+	            android:padding="0dp">
+	        	
+	             <TextView
+	                 style="@style/Text.SliderName"
+	                 android:text="Pictures" />
+	             
+	             <View style="@style/Spacer"/>
+	             
+	             <TextView
+	                 android:id="@+id/LabelNumber" 
+	                 style="@style/Text.SliderLabel"
+	                 android:text="10"/>
+	             
+	             <Button
+	                 android:id="@+id/ButtonNumberSelect"
+	                 style="@style/Item.ButtonNumberInput"
+	                 android:layout_marginRight="0dp"/>
+	            
+	   		 </LinearLayout>
+	   		 
+	        <SeekBar
+	            android:id="@+id/SliderNumber"
+	            style="@style/Item.Slider"
+	            android:max="501"
+	            android:progress="0"/>
+	        
+	    </LinearLayout>
+	    
+        <LinearLayout 
+	        android:id="@+id/ProgressLayout"
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="vertical"
+	    	style="@style/View"
+	    	android:padding="0dp"
+	    	android:visibility="gone">
+	        
             <LinearLayout
-                style="@style/View"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:gravity="center_horizontal|bottom"
-                android:orientation="vertical" >
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" 
+	            android:gravity="center_vertical"
+	            android:padding="0dp">
+	             
+	             <TextView
+	                 style="@style/Text.SliderName"
+	                 android:text="Exposure"/>
+	             
+	             <View style="@style/Spacer"/>
+	             
+	             <TextView
+	                 android:id="@+id/LabelExposureProgress"
+	                 style="@style/Text.ProgressLabel"
+	                 android:text="35s"/>
+	             
+	   		 </LinearLayout>
+	   		 
+	        <ProgressBar
+	            android:id="@+id/ProgressExposure"
+	            style="@style/Item.ProgressBar"/>
+        
+	                    	
+	       <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" 
+	            android:gravity="center_vertical"
+	            android:padding="0dp">
+	             
+	             <TextView
+	                 style="@style/Text.SliderName"
+	                 android:text="Intervall"/>
+	             
+	             <View style="@style/Spacer"/>
+	             
+	             <TextView
+	                 android:id="@+id/LabelIntervallProgress"
+	                 style="@style/Text.ProgressLabel"
+	                 android:text="35s"/>
+	             
+	   		 </LinearLayout>
+	   		 
+	        <ProgressBar
+	            android:id="@+id/ProgressIntervall"
+	            style="@style/Item.ProgressBar"/>
+	        
+	        <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" 
+	            android:gravity="center_vertical"
+	            android:padding="0dp">
+	             
+	             <TextView
+	                 style="@style/Text.SliderName"
+	                 android:text="Number of Pictures"/>
+	             
+	             <View style="@style/Spacer"/>
+	             
+	             <TextView
+	                 android:id="@+id/LabelNumberProgress"
+	                 style="@style/Text.ProgressLabel"
+	                 android:text="35s"/>
+	             
+	   		 </LinearLayout>
+	   		 
+	        <ProgressBar
+	            android:id="@+id/ProgressNumber"
+	            style="@style/Item.ProgressBar"/>
+	        
+	        
+	    </LinearLayout>
+	    
+        <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="fill_parent"
+    	android:orientation="vertical"
+    	style="@style/View"
+    	android:gravity="center_horizontal|bottom">
+        
+        <ToggleButton 
+            android:id="@+id/ButtonShutter"
+            style="@style/Item.ShutterButton" />
+        
+    </LinearLayout>   
+	    
+	</LinearLayout>
 
-                <ToggleButton
-                    android:id="@+id/ButtonShutter"
-                    style="@style/Item.ShutterButton" />
-            </LinearLayout>
-</LinearLayout>
 </ScrollView>
