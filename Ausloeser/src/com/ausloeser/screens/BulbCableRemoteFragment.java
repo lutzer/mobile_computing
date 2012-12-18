@@ -1,7 +1,5 @@
 package com.ausloeser.screens;
 
-import android.app.AlertDialog;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,8 +13,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.ausloeser.dialogs.BaseDialogBuilder;
-import com.ausloeser.dialogs.NumberInputDialogBuilder;
 import com.ausloeser.logic.SingletonCameraController;
 import com.ausloeser.logic.Values;
 import com.ausloeser.views.Utils;
@@ -67,7 +63,7 @@ public class BulbCableRemoteFragment extends AbstractCableRemoteFragment {
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				sliderExposure.setEnabled(arg1);
 				buttonExposureSelect.setEnabled(arg1);
-				setExposure(exposureTime);
+				//setExposure(exposureTime);
 			}
 			
 		});
@@ -118,7 +114,7 @@ public class BulbCableRemoteFragment extends AbstractCableRemoteFragment {
 	public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
 		switch( arg0.getId() ){
 		case R.id.SliderExposure:
-			setExposure(Values.getExposureTime(arg1));
+			//setExposure(Values.getExposureTime(arg1));
 		}
 	}
 

@@ -89,7 +89,7 @@ public enum SingletonCameraController{
 				if(isRunning){
 					triggerStop();
 				}
-				long timelapseLength = amountPictures*intervalTime;
+				long timelapseLength = amountPictures*intervalTime+exposureTime;
 				//trigger initially before the first interval starts
 				//start the timelapse
 				generateTimelapse(timelapseLength, intervalTime, exposureTime);

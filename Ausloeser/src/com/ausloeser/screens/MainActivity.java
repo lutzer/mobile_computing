@@ -97,10 +97,10 @@ public class MainActivity extends SherlockActivity {
 		modes.add(new Mode("Timelapse",
 				"Set your remote up for recording timelapses",
 				"img/modes/timelapse.png"));
-		modes.add(new Mode("Soundtrap", "just at test mode",
+		modes.add(new Mode("Soundtrap", "Dont' make a noise!",
 				"img/modes/clapping.png"));
 		modes.add(new Mode("Just Fire",
-				"Exposes as hast as your camera supports.",
+				"Exposes as fast as your camera supports.",
 				"img/modes/cannon.png"));
 		modes.add(new Mode("Cameratrap",
 				"Triggers whenever someone walks into the frame",
@@ -118,6 +118,9 @@ public class MainActivity extends SherlockActivity {
 			int position, long id) {
 		        if (position==0) { 
 		        	Intent intent = new Intent(getApplicationContext(), CableRemoteActivity.class);
+		        	startActivity(intent);
+		        }else if(position == 1){
+		        	Intent intent = new Intent(getApplicationContext(), TimelapseActivity.class);
 		        	startActivity(intent);
 		        }else if(position == 3){
 		        	Intent intent = new Intent(getApplicationContext(), JustFireActivity.class);

@@ -98,7 +98,6 @@
         <ToggleButton 
             android:id="@+id/ButtonShutter"
             style="@style/Item.ShutterButton" />
-        
     </LinearLayout>
 
     
