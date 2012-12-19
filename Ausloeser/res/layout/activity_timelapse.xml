@@ -143,7 +143,7 @@
 	        <SeekBar
 	            android:id="@+id/SliderNumber"
 	            style="@style/Item.Slider"
-	            android:max="501"
+	            android:max="500"
 	            android:progress="0"/>
 	        
 	    </LinearLayout>

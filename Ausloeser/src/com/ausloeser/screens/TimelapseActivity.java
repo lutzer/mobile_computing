@@ -149,7 +149,7 @@ public class TimelapseActivity extends SherlockActivity implements OnClickListen
 		sliderIntervall.setProgress(prefs.getInt("TimelapseIntervall", 0));
 		intervallTime = prefs.getInt("TimelapseIntervallTime", Values.getIntervallTime(0));
 		sliderNumber.setProgress(prefs.getInt("TimelapseNumber", 0));
-		numberOfPictures = prefs.getInt("TimelapseNumberOfPictures", Values.getIntervallTime(0));
+		numberOfPictures = prefs.getInt("TimelapseNumberOfPictures", 1);
 		
 		setExposure(exposureTime);
 	}
@@ -173,19 +173,27 @@ public class TimelapseActivity extends SherlockActivity implements OnClickListen
 
 	@Override
 	public void onTimerExposureUpdate(long exposureLeft, long exposureTime) {
-		// TODO Auto-generated method stub
-		
+		int actProgress = (int) (exposureLeft * 100 / exposureTime);
+		progressExposure.setProgress(actProgress);
+		labelExposureProgress.setText(exposureLeft/1000+" / "+exposureTime/1000+"s");
 	}
 
 	@Override
 	public void onTimerDelayUpdate(long delayLeft, long delayTime) {
-		// TODO Auto-generated method stub
+		int actProgress = (int) (delayLeft * 100 / delayTime);
+		progressIntervall.setProgress(actProgress);
+		labelIntervallProgress.setText(delayLeft/1000+" / "+delayTime/1000+"s");
 		
 	}
 
 	@Override
-	public void onTimerTimelapseUpdate(long allovertimeLeft, long timeLeft, int intervalsLeft) {
-		// TODO Auto-generated method stub
+	public void onTimerTimelapseUpdate(int shotsLeft, int totalShots) {
+		int actProgress = (int) (shotsLeft * 100 / totalShots);
+		progressNumber.setProgress(actProgress);
+		labelNumberProgress.setText(shotsLeft+" / "+totalShots);
+		
+		if (shotsLeft < 1)
+			this.stopTimelapse();
 		
 	}
 
@@ -310,11 +318,10 @@ public class TimelapseActivity extends SherlockActivity implements OnClickListen
 	}
 	
 	private void setNumber(int value) {
+		if (value < 1) 
+			value = 1;
 		numberOfPictures = value;
-		if (value == -1)
-			labelNumber.setText("unlimited");
-		else
-			labelNumber.setText(value+"");
+		labelNumber.setText(value+"");
 	}
 
 	protected void startTriggerCamera() {
@@ -329,6 +336,12 @@ public class TimelapseActivity extends SherlockActivity implements OnClickListen
 		shutterButton.setChecked(false);
 		cameraControler.triggerStop();
 		
+	}
+	
+	protected void stopTimelapse() {
+		controlLayout.setVisibility(View.VISIBLE);
+		progressLayout.setVisibility(View.GONE);
+		shutterButton.setChecked(false);
 	}
 	
 
