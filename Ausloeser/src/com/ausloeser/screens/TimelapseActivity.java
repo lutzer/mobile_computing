@@ -168,7 +168,7 @@ public class TimelapseActivity extends SherlockActivity implements OnClickListen
 	}
 
 	@Override
-	public void onTimerTimelapseUpdate(long timeLeft, int intervalsLeft) {
+	public void onTimerTimelapseUpdate(long allovertimeLeft, long timeLeft, int intervalsLeft) {
 		// TODO Auto-generated method stub
 		
 	}

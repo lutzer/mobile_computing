@@ -3,6 +3,7 @@ package com.ausloeser.logic;
 import java.util.ArrayList;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 
 
 /**
@@ -115,7 +116,8 @@ public enum SingletonCameraController{
 				if(isRunning){
 					triggerStop();
 				}
-				//long totalTimelapseTime = intervalTim
+				long totalTimelapseTime = intervalTime * amountPictures;
+				generateTimelapse(totalTimelapseTime, intervalTime, exposureTime, amountPictures);
 			}
 			
 			public void stopTimelapse(){
@@ -128,22 +130,27 @@ public enum SingletonCameraController{
 	 * @param intervalTime
 	 * @param exposureTime
 	 */
-	private void generateTimelapse (long intervalTime, final long exposureTime, int amountPictures){
-//		timelapseTimer= new CountDownTimer(intervalTime, 40){
-//			@Override
-//			public void onTick(long millisUntilFinished) {
-//			}
-//			
-//			@Override
-//			public void onFinish() {
-//				Log.d(TAG, "Timelapse finished");
-//				generateExposure(exposureTime);
-//				sendTimerTimelapse(millisUntilFinished, intervalsLeft);
-//				sendTimerTimelapse(0, 0);
-//				
-//			}
-//			
-//		}.start();
+	private void generateTimelapse (final long totalTimelapseTime, long intervalTime, final long exposureTime, final int amountPictures){
+		
+		
+		timelapseTimer= new CountDownTimer(totalTimelapseTime, intervalTime){
+			//counts the amountPictures up
+			int i = 1;
+			@Override
+			public void onTick(long millisUntilFinished) {
+				Log.d(TAG, "Timelapse triggered millisUntilFinished: "+millisUntilFinished+" i: "+i);
+				generateExposure(exposureTime);
+				sendTimerTimelapse(totalTimelapseTime, millisUntilFinished, i);
+				i++;
+			}
+			
+			@Override
+			public void onFinish() {
+				Log.d(TAG, "Timelapse finished");
+				sendTimerTimelapse(0, 0, i);
+			}
+			
+		}.start();
 	}
 	
 	
@@ -227,9 +234,9 @@ public enum SingletonCameraController{
 		}
 	}
 	
-	public void sendTimerTimelapse(long timeLeft, int intervalsLeft){
+	public void sendTimerTimelapse(long totalTimeLeft, long millisUntilFinished, int shotsDone){
 		for(OnDelayExposureTimerListener listener:listeners){
-			listener.onTimerTimelapseUpdate(timeLeft, intervalsLeft);
+			listener.onTimerTimelapseUpdate(totalTimeLeft, millisUntilFinished, shotsDone);
 		}
 	}
 }

@@ -1,78 +1,24 @@
 package com.ausloeser.screens;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.widget.TextView;
 
-import com.ausloeser.views.SliderSwitch;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.ausloeser.views.Utils;
 
 public class JustFireActivity extends SherlockFragmentActivity {
 
-	SliderSwitch sliderSwitch;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_cable_remote);
+		setContentView(R.layout.activity_just_fire);
 		// Show the Up button in the action bar.
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		
-		
-		// setup slider switch to select the modes
-		String[] labels = { "Simple", "Delay", "Bulb", "Hold" }; 
-		sliderSwitch = (SliderSwitch) findViewById(R.id.sliderSwitch);
-		sliderSwitch.setLabelTexts(labels);
-		sliderSwitch.setOnSliderSwitchChangeListener(new SliderSwitch.OnSliderSwitchChangeListener() {
-
-			@Override
-			public void onProgressChanged(int snappedPosition) {
-				// When the given tab is selected, show the tab contents in the container
-				SherlockFragment fragment = null;
-				switch (snappedPosition)
-				{
-				case 0:
-					fragment = new SimpleCableRemoteFragment();
-					break;
-				case 1:
-					fragment = new DelayCableRemoteFragment();
-					break;
-				default:
-					//fragment = new SherlockFragment();		
-					return;
-				}
-				if (fragment != null)
-					getSupportFragmentManager().beginTransaction()
-						.replace(R.id.content, fragment)
-						.commit();
-			}
-
-			@Override
-			public void onStartTrackingTouch(int snappedPosition) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onStopTrackingTouch(int snappedPosition) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
-		
-
-		sliderSwitch.setSliderPosition(0);
 		
 		// apply fonts
 		Utils.applyFonts(findViewById(R.id.titleStripe),Typeface.createFromAsset(getAssets(),"fonts/eurostile.ttf"));
@@ -110,7 +56,6 @@ public class JustFireActivity extends SherlockFragmentActivity {
 		// load settings
 		SharedPreferences prefs = getSharedPreferences(
 				"com.ausloeser.app", this.MODE_PRIVATE);
-		sliderSwitch.setSliderPosition(prefs.getInt("CableRemoteMode", 0));
 	}
 	
 	@Override
@@ -120,7 +65,6 @@ public class JustFireActivity extends SherlockFragmentActivity {
 		// save settings
 		SharedPreferences prefs = getSharedPreferences(
 				"com.ausloeser.app", this.MODE_PRIVATE);
-		prefs.edit().putInt("CableRemoteMode", sliderSwitch.getSliderPosition()).commit();
 		
 	}
 
