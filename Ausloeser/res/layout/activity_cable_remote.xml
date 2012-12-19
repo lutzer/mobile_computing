@@ -24,7 +24,7 @@
 
             <TextView
                 style="@style/Text.TitleStripe"
-                android:text="MODE" />
+                android:text="REMOTE" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -44,6 +44,7 @@
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+        
     </LinearLayout>
 
 </ScrollView>

@@ -163,7 +163,7 @@ public class DelayCableRemoteFragment extends AbstractCableRemoteFragment {
 		SharedPreferences prefs = getActivity().getSharedPreferences(
 				"com.ausloeser.app", getActivity().MODE_PRIVATE);
 		sliderExposure.setProgress(prefs.getInt("CableRemoteExposure", 0));
-		buttonExposure.setChecked(prefs.getBoolean("CoableRemoteExposureExposureChecked", false));
+		buttonExposure.setChecked(prefs.getBoolean("CoableRemoteExposureChecked", false));
 		exposureTime = prefs.getInt("CableRemoteExposureTime", Values.getExposureTime(0));
 		
 		sliderDelay.setProgress(prefs.getInt("CableRemoteDelay", 0));
@@ -183,7 +183,7 @@ public class DelayCableRemoteFragment extends AbstractCableRemoteFragment {
 				"com.ausloeser.app", getActivity().MODE_PRIVATE);
 		prefs.edit().putInt("CableRemoteExposure", sliderExposure.getProgress()).commit();
 		prefs.edit().putInt("CableRemoteExposureTime", exposureTime).commit();
-		prefs.edit().putBoolean("CoableRemoteExposureExposureChecked", buttonExposure.isChecked()).commit();
+		prefs.edit().putBoolean("CoableRemoteExposureChecked", buttonExposure.isChecked()).commit();
 		
 		prefs.edit().putInt("CableRemoteDelay", sliderDelay.getProgress()).commit();
 		prefs.edit().putInt("CableRemoteDelayTime", exposureTime).commit();
