@@ -140,18 +140,34 @@ public class TimelapseActivity extends SherlockActivity implements OnClickListen
 	public void onResume() {
 		super.onResume();
 		
-		// load settings
-		SharedPreferences prefs = getSharedPreferences(
+		// read preferences
+		SharedPreferences prefs = this.getSharedPreferences(
 				"com.ausloeser.app", this.MODE_PRIVATE);
+		sliderExposure.setProgress(prefs.getInt("TimelapseExposure", 0));
+		buttonExposure.setChecked(prefs.getBoolean("TimelapseExposureChecked", false));
+		exposureTime = prefs.getInt("TimelapseExposureTime", Values.getExposureTime(0));
+		sliderIntervall.setProgress(prefs.getInt("TimelapseIntervall", 0));
+		intervallTime = prefs.getInt("TimelapseIntervallTime", Values.getIntervallTime(0));
+		sliderNumber.setProgress(prefs.getInt("TimelapseNumber", 0));
+		numberOfPictures = prefs.getInt("TimelapseNumberOfPictures", Values.getIntervallTime(0));
+		
+		setExposure(exposureTime);
 	}
 	
 	@Override
 	public void onPause() {
 		super.onPause();
 		
-		// save settings
-		SharedPreferences prefs = getSharedPreferences(
+		//savesettings
+		SharedPreferences prefs = this.getSharedPreferences(
 				"com.ausloeser.app", this.MODE_PRIVATE);
+		prefs.edit().putInt("TimelapseExposure", sliderExposure.getProgress()).commit();
+		prefs.edit().putInt("TimelapseExposureTime", exposureTime).commit();
+		prefs.edit().putBoolean("TimelapseExposureChecked", buttonExposure.isChecked()).commit();
+		prefs.edit().putInt("TimelapseIntervall", sliderIntervall.getProgress()).commit();
+		prefs.edit().putInt("TimelapseIntervallTime", intervallTime).commit();
+		prefs.edit().putInt("TimelapseNumber", sliderNumber.getProgress()).commit();
+		prefs.edit().putInt("TimelapseNumberOfPictures", numberOfPictures).commit();
 		
 	}
 
@@ -304,7 +320,7 @@ public class TimelapseActivity extends SherlockActivity implements OnClickListen
 	protected void startTriggerCamera() {
 		controlLayout.setVisibility(View.GONE);
 		progressLayout.setVisibility(View.VISIBLE);
-		cameraControler.triggerExposure(exposureTime);
+		cameraControler.triggerTimelapse(intervallTime, exposureTime, numberOfPictures);
 	}
 	
 	protected void stopTriggerCamera() {
