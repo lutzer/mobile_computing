@@ -23,6 +23,12 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.ausloeser.views.Utils;
 
+/**
+ * Starting point of the application, handling the main list, etc
+ *
+ * @author Lutze Reiter und Arnim Jepsne
+ *
+ */
 public class MainActivity extends SherlockActivity {
 	
 	private class Mode {
