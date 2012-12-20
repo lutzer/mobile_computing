@@ -33,6 +33,13 @@
                 android:background="@drawable/title_stripe" />
         </LinearLayout>
         
+            	<TextView
+            style="@style/Text.ModeDescription"
+            android:text="Hold down the button and your camera will trigger as fast as possible." />
+
+        <TextView
+            style="@style/Text.ModeDescription"
+            android:text="Let go to stop it." />
            
             
             <LinearLayout
