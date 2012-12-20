@@ -1,16 +1,33 @@
 package com.ausloeser.screens;
 
 import android.content.SharedPreferences;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.ausloeser.logic.SingletonCameraController;
 import com.ausloeser.views.Utils;
 
+/**
+ * as long as user holds down the button this class allows to fire as fast as possible in a row
+ * 
+ * @author Lutz Reiter & Arnim Jepsen
+ *
+ */
 public class JustFireActivity extends SherlockFragmentActivity {
+	
+	ToggleButton shutterButton;
+	
+	SingletonCameraController cameraControler;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +35,28 @@ public class JustFireActivity extends SherlockFragmentActivity {
 		setContentView(R.layout.activity_just_fire);
 		// Show the Up button in the action bar.
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		cameraControler = SingletonCameraController.INSTANCE;
+		
+		shutterButton = (ToggleButton) this.findViewById(R.id.ButtonShutter);
+		
+		shutterButton.setOnTouchListener(new Button.OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View view, MotionEvent event) {
+//				if (event.getAction() == MotionEvent.ACTION_DOWN ) {
+//					startTriggerCamera();
+//                } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL ) {
+//					stopTriggerCamera();
+//                }
+				
+				while(event.getAction() == MotionEvent.ACTION_DOWN){
+					cameraControler.triggerExposure(100);
+				}
+				
+				return false;
+			}
+		   });
 		
 		
 		// apply fonts
