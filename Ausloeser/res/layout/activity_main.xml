@@ -37,6 +37,8 @@
 	    android:scrollbars="vertical" 
 	    android:divider="@drawable/list_stripe_bg"
 		android:dividerHeight="15dp"
+		android:fadingEdge="none"
+		android:overScrollMode="never"
 		style="@style/View.List"/>
 
 </LinearLayout>

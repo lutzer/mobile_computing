@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:id="@+id/mainLayout"
     tools:context=".CableRemoteActivity" >
 
     <LinearLayout
@@ -33,6 +34,13 @@
                 android:background="@drawable/title_stripe" />
         </LinearLayout>
         
+            	<TextView
+            style="@style/Text.ModeDescriptionMarginTop"
+            android:text="Hold down the button and your camera will trigger as fast as possible." />
+
+        <TextView
+            style="@style/Text.ModeDescription"
+            android:text="Let go to stop it." />
            
             
             <LinearLayout
