@@ -154,7 +154,10 @@ public class MainActivity extends SherlockActivity {
 		        }else if(position == 2){
 		        	Intent intent = new Intent(getApplicationContext(), JustFireActivity.class);
 		        	startActivity(intent);
-		        }
+		        }else if(position == 3){
+	        	Intent intent = new Intent(getApplicationContext(), SoundDetectionActivity.class);
+	        	startActivity(intent);
+	        }
 			}
         });
 	}
