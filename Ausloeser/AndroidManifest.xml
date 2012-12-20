@@ -3,6 +3,9 @@
     package="com.ausloeser.screens"
     android:versionCode="1"
     android:versionName="1.0" >
+
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
@@ -15,6 +18,7 @@
         android:icon="@drawable/our_launcher_icon"
         android:label="@string/app_name"
         android:theme="@style/Theme.Styled" 
+        
         >
         
         <activity
@@ -58,6 +62,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ausloeser.screens.MainActivity" />
         </activity>
+<<<<<<< HEAD
+                <activity
+            android:name="com.ausloeser.screens.SoundDetectionActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.ausloeser.screens.MainActivity" 
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ausloeser.screens.MainActivity" />
+        </activity>
+=======
         <activity
             android:name="com.ausloeser.screens.SmsTriggerActivity"
             android:label="@string/app_name"
@@ -77,6 +92,7 @@
             </intent-filter> 
         </receiver>
         
+>>>>>>> branch 'master' of https://github.com/lutzer/mobile_computing.git
     </application>
 
 </manifest>
