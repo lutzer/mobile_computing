@@ -107,7 +107,7 @@ public class MainActivity extends SherlockActivity {
 				"Exposes as fast as your camera supports.",
 				"img/modes/cannon.png"));
 		modes.add(new Mode("SMS Trigger", "Trigger your camera when you receive a SMS",
-				"img/modes/clapping.png"));
+				"img/modes/sms.png"));
 		modes.add(new Mode("Soundtrap", "Dont' make a noise!",
 				"img/modes/clapping.png"));
 		modes.add(new Mode("Cameratrap",
