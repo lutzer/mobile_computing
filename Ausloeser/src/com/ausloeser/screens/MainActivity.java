@@ -106,6 +106,8 @@ public class MainActivity extends SherlockActivity {
 		modes.add(new Mode("Just Fire",
 				"Exposes as fast as your camera supports.",
 				"img/modes/cannon.png"));
+		modes.add(new Mode("SMS Trigger", "Trigger your camera when you receive a SMS",
+				"img/modes/clapping.png"));
 		modes.add(new Mode("Soundtrap", "Dont' make a noise!",
 				"img/modes/clapping.png"));
 		modes.add(new Mode("Cameratrap",
@@ -130,6 +132,9 @@ public class MainActivity extends SherlockActivity {
 		        	startActivity(intent);
 		        }else if(position == 2){
 		        	Intent intent = new Intent(getApplicationContext(), JustFireActivity.class);
+		        	startActivity(intent);
+		        }else if(position == 3){
+		        	Intent intent = new Intent(getApplicationContext(), SmsTriggerActivity.class);
 		        	startActivity(intent);
 		        }
 			}

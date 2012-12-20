@@ -1,0 +1,98 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res/com.ausloeser.screens"
+    style="@style/MainTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".CableRemoteActivity" 
+    android:id="@+id/mainLayout">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/titleStripe"
+            style="@style/View.TitleStripe" >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/title_stripe" />
+
+            <TextView
+                style="@style/Text.TitleStripe"
+                android:text="SMS TRIGGER" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/title_stripe" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/ControlsLayout"
+            style="@style/View"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="0dp" >
+
+            <TextView
+                style="@style/Text.ModeDescription"
+                android:text="Press the shutter button to acivate SMS Trigger Mode" />
+            
+        </LinearLayout>
+        
+         <LinearLayout
+             android:id="@+id/ProgressLayout"
+             style="@style/View"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             android:padding="0dp"
+             android:visibility="gone" >
+            
+              <TextView
+                	style="@style/Text.ModeDescription"
+                	android:text="Send an SMS with '+trigger' to trigger the camera. " />
+        
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center_vertical"
+                 android:orientation="horizontal"
+                 android:padding="0dp" >
+
+                 <TextView
+                     style="@style/Text.SliderName"
+                     android:text="Trigger SMS received:" />
+
+                 <View style="@style/Spacer" />
+
+                 <TextView
+                     android:id="@+id/LabelExposureProgress"
+                     style="@style/Text.ProgressLabel"
+                     android:text="0" />
+             </LinearLayout>
+         </LinearLayout>
+
+        <LinearLayout
+            style="@style/View"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_horizontal|bottom"
+            android:orientation="vertical" >
+
+            <ToggleButton
+                android:id="@+id/ButtonShutter"
+                style="@style/Item.ShutterButton" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

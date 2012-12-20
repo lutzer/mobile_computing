@@ -37,9 +37,7 @@ public class JustFireActivity extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		cameraControler = SingletonCameraController.INSTANCE;
-		
 		shutterButton = (ToggleButton) this.findViewById(R.id.ButtonShutter);
-		
 		shutterButton.setOnTouchListener(new Button.OnTouchListener() {
 
 			@Override
