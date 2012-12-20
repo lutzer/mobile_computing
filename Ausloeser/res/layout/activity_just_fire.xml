@@ -34,7 +34,7 @@
         </LinearLayout>
         
             	<TextView
-            style="@style/Text.ModeDescription"
+            style="@style/Text.ModeDescriptionMarginTop"
             android:text="Hold down the button and your camera will trigger as fast as possible." />
 
         <TextView

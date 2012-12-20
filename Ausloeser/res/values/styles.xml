@@ -170,6 +170,13 @@
 	    <item name="android:layout_width">match_parent</item>
 	    <item name="android:gravity">center</item>
 	</style>
+		<style name="Text.ModeDescriptionMarginTop" parent="Text.SliderName">
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:gravity">center</item>
+	    <item name="android:layout_marginTop">40dp</item>
+	    <item name="android:layout_marginBottom">10dp</item>
+	    
+	</style>
 	
 	<style name="Text.SliderSwitch">
 	    <item name="android:layout_height">wrap_content</item>
