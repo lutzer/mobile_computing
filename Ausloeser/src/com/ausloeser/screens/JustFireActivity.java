@@ -56,7 +56,7 @@ public class JustFireActivity extends SherlockActivity {
 		
 		
 		// apply fonts
-		Utils.applyFonts(findViewById(R.id.titleStripe),Typeface.createFromAsset(getAssets(),"fonts/eurostile.ttf"));
+		Utils.applyFonts(findViewById(R.id.mainLayout),Typeface.createFromAsset(getAssets(),"fonts/eurostile.ttf"));
 				
 	}
 
