@@ -1,7 +1,6 @@
 package com.ausloeser.screens;
 
 import android.content.SharedPreferences;
-
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -10,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ToggleButton;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.ausloeser.logic.SingletonCameraController;
@@ -22,9 +21,9 @@ import com.ausloeser.views.Utils;
  * @author Lutz Reiter & Arnim Jepsen
  *
  */
-public class JustFireActivity extends SherlockFragmentActivity {
+public class JustFireActivity extends SherlockActivity {
 	
-	ToggleButton shutterButton;
+	Button shutterButton;
 	
 	SingletonCameraController cameraControler;
 
@@ -38,21 +37,18 @@ public class JustFireActivity extends SherlockFragmentActivity {
 		
 		cameraControler = SingletonCameraController.INSTANCE;
 		
-		shutterButton = (ToggleButton) this.findViewById(R.id.ButtonShutter);
+		shutterButton = (Button) findViewById(R.id.ButtonShutter);
 		
 		shutterButton.setOnTouchListener(new Button.OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {
-//				if (event.getAction() == MotionEvent.ACTION_DOWN ) {
-//					startTriggerCamera();
-//                } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL ) {
-//					stopTriggerCamera();
-//                }
-				
-				while(event.getAction() == MotionEvent.ACTION_DOWN){
-					cameraControler.triggerExposure(100);
-				}
+				if (event.getAction() == MotionEvent.ACTION_DOWN ) {
+					cameraControler.triggerUnlimited();
+                } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL ) {
+					cameraControler.triggerStop();
+                }
+
 				
 				return false;
 			}
@@ -60,7 +56,7 @@ public class JustFireActivity extends SherlockFragmentActivity {
 		
 		
 		// apply fonts
-		Utils.applyFonts(findViewById(R.id.titleStripe),Typeface.createFromAsset(getAssets(),"fonts/eurostile.ttf"));
+		Utils.applyFonts(findViewById(R.id.mainLayout),Typeface.createFromAsset(getAssets(),"fonts/eurostile.ttf"));
 				
 	}
 
@@ -106,5 +102,5 @@ public class JustFireActivity extends SherlockFragmentActivity {
 				"com.ausloeser.app", this.MODE_PRIVATE);
 		
 	}
-
 }
+

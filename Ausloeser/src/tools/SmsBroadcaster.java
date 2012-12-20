@@ -2,9 +2,10 @@ package tools;
 
 import java.util.ArrayList;
 
-import com.ausloeser.logic.OnDelayExposureTimerListener;
+import android.util.Log;
 
-enum SmsBroadcaster {
+
+public enum SmsBroadcaster {
 	INSTANCE;
 	
 	

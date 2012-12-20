@@ -2,6 +2,8 @@ package com.ausloeser.screens;
 
 import java.util.ArrayList;
 
+import tools.SmsBroadcaster;
+import tools.SmsBroadcaster.OnSmsReceivedListener;
 import tools.SmsReceiver;
 
 import android.content.BroadcastReceiver;
@@ -32,12 +34,12 @@ import com.ausloeser.views.Utils;
  * @author Lutz Reiter & Arnim Jepsen
  *
  */
-public class SmsTriggerActivity extends SherlockActivity {
+public class SmsTriggerActivity extends SherlockActivity implements OnSmsReceivedListener {
 	
 	ToggleButton shutterButton;
 	
 	SingletonCameraController cameraControler;
-	SmsReceiver smsReceiver;
+	SmsBroadcaster smsBroadcaster;
 	
 	View controlLayout,progressLayout;
 
@@ -49,7 +51,7 @@ public class SmsTriggerActivity extends SherlockActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		cameraControler = SingletonCameraController.INSTANCE;
-		smsReceiver = new SmsReceiver();
+		smsBroadcaster = SmsBroadcaster.INSTANCE;
 		
 		controlLayout = findViewById(R.id.ControlsLayout); // holds sliders and buttons
 		progressLayout = findViewById(R.id.ProgressLayout); // holds progress bars
@@ -102,7 +104,7 @@ public class SmsTriggerActivity extends SherlockActivity {
 		
 		//android.provider.Telephony.SMS_RECEIVED
 		//register sms receiver
-		this.registerReceiver(smsReceiver, new IntentFilter(new Action);
+		smsBroadcaster.setOnSmsReceivedListener(this);
 		
 		
 		// load settings
@@ -113,6 +115,8 @@ public class SmsTriggerActivity extends SherlockActivity {
 	@Override
 	public void onPause() {
 		super.onPause();
+		
+		smsBroadcaster.removeOnSmsReceivedListener(this);
 		
 		// save settings
 		SharedPreferences prefs = getSharedPreferences(
@@ -131,10 +135,12 @@ public class SmsTriggerActivity extends SherlockActivity {
 		shutterButton.setChecked(false);
 	}
 	
-	public void OnSmsReceived(String sender, String msg) {
+	@Override
+	public void onSmsReceived(String sender, String msg) {
 		Log.e("INFO", "JAAA MANN! msg:" + msg + " sender: "+sender);
 		if (msg.contains("+trigger"))
 			Log.e("INFO","FETT!");
+		
 	}
 
 }

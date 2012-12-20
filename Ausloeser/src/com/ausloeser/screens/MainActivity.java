@@ -113,10 +113,7 @@ public class MainActivity extends SherlockActivity {
 		modes.add(new Mode("Cameratrap",
 				"Triggers whenever someone walks into the frame",
 				"img/modes/siren.png"));
-		modes.add(new Mode("SMS-Triggering",
-				"The camera is triggered when a SMS arrives",
-				"img/modes/sms.png"));
-
+		
 		ListView listView =  ((ListView) findViewById(R.id.listView));
 		listView.setAdapter(new ListAdapter(this,modes));
 		
